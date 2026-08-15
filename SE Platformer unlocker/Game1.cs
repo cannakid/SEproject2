@@ -35,7 +35,7 @@ namespace SE_Platformer_unlocker
                 Instance = this;
 
                 _graphics = new GraphicsDeviceManager(this);
-                //_graphics.IsFullScreen = true;
+                _graphics.IsFullScreen = true;
                 _graphics.PreferredBackBufferWidth = WIDTH;
                 _graphics.PreferredBackBufferHeight = HEIGHT;
                 Content.RootDirectory = "Content";
@@ -49,10 +49,14 @@ namespace SE_Platformer_unlocker
 
             base.Initialize();
 
-            champ = new Champion(yellow, new Point(0, 0), new Point(50, 50));
+            LoadedObjects.Add(new Champion(yellow, new Point(0, 0), new Point(50, 50)));
             LoadedObjects.Add(new Block(brown, new Point(0, 1300), new Point(1000, 50)));
             LoadedObjects.Add(new Block(brown, new Point(200, 1225), new Point(50, 75)));
             LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
+
+            Rectangle rect = new Rectangle(new Point(600, 1200), new Point(120, 20));
+
+            LoadedObjects.Add(new MovingPlatform(brown, rect, new Rectangle(rect.Location, rect.Size), new Point(600, 1200), new Point(1000, 1200), -1, 2));
 
             //uiElements.Add(new UIText("Hello world", new Rectangle(50, 50, 500, 100), font));
         }
@@ -75,7 +79,13 @@ namespace SE_Platformer_unlocker
                 Exit();
 
             // TODO: Add your update logic here
-            champ.Update();
+            foreach (IGameObject gameObject in LoadedObjects)
+            {
+                if (gameObject is IDynamic d)
+                {
+                    d.Update();
+                }
+            }
             base.Update(gameTime);
         }
 
@@ -85,7 +95,6 @@ namespace SE_Platformer_unlocker
 
             _spriteBatch.Begin();
 
-            champ.Draw(_spriteBatch);
             foreach (IGameObject gameObject in LoadedObjects)
             {
                 if (gameObject is IVisible v)

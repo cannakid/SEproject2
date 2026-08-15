@@ -6,9 +6,9 @@ using System.Collections.Generic;
 
 namespace SE_Platformer_unlocker.Collections
 {
-    internal interface IScreen
+    internal interface IScreen<T>
     {
-        public List<IGameObject> Objects { get; set; }
+        public List<T> Objects { get; set; }
 
         public bool Loaded { get; set; }
 

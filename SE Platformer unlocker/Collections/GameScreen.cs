@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SE_Platformer_unlocker.Collections
 {
-    internal class Screen : IScreen
+    internal class GameScreen : IScreen<IGameObject>
     {
         public List<IGameObject> Objects { get; set; }
         public bool Loaded { get; set; }
