@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Profile>Reach</Profile>
+  <Platform>DesktopGL</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/Brown.png</File>
+    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/File.spritefont</File>
+    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/herochar_spritesheet(new).png</File>
+    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/Yellow.png</File>
+  </SourceFiles>
+  <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+  </DestFiles>
+</SourceFileCollection>
