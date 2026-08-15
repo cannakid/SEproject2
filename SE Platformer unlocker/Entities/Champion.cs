@@ -15,6 +15,7 @@ namespace SE_Platformer_unlocker.Entities
     {
         private Vector2 speed;
         private bool isGrounded;
+        private bool remainGrounded = false;
         private Rectangle nextPos;
 
         public Champion(Texture2D texture, Point pos, Point size)
@@ -44,11 +45,9 @@ namespace SE_Platformer_unlocker.Entities
             {
                 speed.Y += 0.5f;
             }
-            if (TextureRect.Bottom > Game1.HEIGHT - 100)
+            if (TextureRect.Top > Game1.HEIGHT)
             {
-                textureRect.Y = Game1.HEIGHT - 100 - textureRect.Height;
-                speed.Y = 0;
-                isGrounded = true;
+                Game1.Instance.Exit(); // replace with game over screen
             }
             if (isGrounded && Keyboard.GetState().IsKeyDown(Keys.W))
             {
@@ -57,6 +56,7 @@ namespace SE_Platformer_unlocker.Entities
             }
             nextPos.Offset(speed);
             // interact
+            remainGrounded = false;
             foreach (IGameObject gameObject in Game1.Instance.LoadedObjects)
             {
                 if (gameObject is IInteractable)
@@ -64,12 +64,17 @@ namespace SE_Platformer_unlocker.Entities
                     Interact(gameObject as IInteractable);
                 }
             }
+            isGrounded = remainGrounded;
             hitBox = nextPos;
             textureRect = nextPos;
         }
 
         public override void Interact(IInteractable interactable)
         {
+            if (interactable.HitBox.Top == HitBox.Bottom + 1)
+            {
+                remainGrounded = true;
+            }
             if (!interactable.HitBox.Intersects(nextPos))
             {
                 return;
@@ -78,6 +83,7 @@ namespace SE_Platformer_unlocker.Entities
             {
                 speed.Y = 0;
                 isGrounded = true;
+                remainGrounded = true;
                 nextPos.Y = interactable.HitBox.Top - HitBox.Size.Y; // Y is top side
             }
             else if (HitBox.Top >= interactable.HitBox.Bottom)

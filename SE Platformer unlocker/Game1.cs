@@ -54,7 +54,7 @@ namespace SE_Platformer_unlocker
             LoadedObjects.Add(new Block(brown, new Point(200, 1225), new Point(50, 75)));
             LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
 
-            uiElements.Add(new UIText("Hello world", new Rectangle(50, 50, 500, 100), font));
+            //uiElements.Add(new UIText("Hello world", new Rectangle(50, 50, 500, 100), font));
         }
 
         protected override void LoadContent()
