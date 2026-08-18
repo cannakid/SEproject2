@@ -49,10 +49,19 @@ namespace SE_Platformer_unlocker
 
             base.Initialize();
 
-            LoadedObjects.Add(new Champion(yellow, new Point(0, 0), new Point(50, 50)));
+            LoadedObjects.Add(new Champion(yellow, new Point(0, 1200), new Point(50, 50)));
             LoadedObjects.Add(new Block(brown, new Point(0, 1300), new Point(1000, 50)));
             LoadedObjects.Add(new Block(brown, new Point(200, 1225), new Point(50, 75)));
             LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
+            LoadedObjects.Add(new Block(brown, new Point(800, 750), new Point(500, 50)));
+            LoadedObjects.Add(new Block(brown, new Point(1000, 700), new Point(200, 25)));
+            /*LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
+            LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
+            LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
+            LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
+            LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
+            LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
+            LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));*/
 
             Rectangle rect = new Rectangle(new Point(600, 1200), new Point(120, 20));
 
