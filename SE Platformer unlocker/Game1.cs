@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Library;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SE_Platformer_unlocker.Base;
@@ -9,38 +10,19 @@ using System.Collections.Generic;
 
 namespace SE_Platformer_unlocker
 {
-    public class Game1 : Game
+    public class Game1 : Core
     {
-        public static Game1 Instance { get; private set; }
-
-        public static readonly int WIDTH = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-        public static readonly int HEIGHT = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-
-        private GraphicsDeviceManager _graphics;
-        private SpriteBatch _spriteBatch;
 
         private Texture2D brown;
         private Texture2D yellow;
         private SpriteFont font;
 
-        private Champion champ;
-
         public List<IGameObject> LoadedObjects = new List<IGameObject>();
         public List<IUiElement> uiElements = new List<IUiElement>();
 
-        public Game1()
+        public Game1() : base("Unlocker", false)
         {
-            if (Instance is null)
-            {
-                Instance = this;
-
-                _graphics = new GraphicsDeviceManager(this);
-                _graphics.IsFullScreen = true;
-                _graphics.PreferredBackBufferWidth = WIDTH;
-                _graphics.PreferredBackBufferHeight = HEIGHT;
-                Content.RootDirectory = "Content";
-                IsMouseVisible = true;
-            }
+            
         }
 
         protected override void Initialize()
@@ -53,8 +35,8 @@ namespace SE_Platformer_unlocker
             LoadedObjects.Add(new Block(brown, new Point(0, 1300), new Point(1000, 50)));
             LoadedObjects.Add(new Block(brown, new Point(200, 1225), new Point(50, 75)));
             LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
-            LoadedObjects.Add(new Block(brown, new Point(800, 750), new Point(500, 50)));
-            LoadedObjects.Add(new Block(brown, new Point(1000, 700), new Point(200, 25)));
+            LoadedObjects.Add(new Block(brown, new Point(800, 1000), new Point(500, 50)));
+            LoadedObjects.Add(new Block(brown, new Point(1000, 800), new Point(200, 25)));
             /*LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
             LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
             LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
@@ -72,14 +54,12 @@ namespace SE_Platformer_unlocker
 
         protected override void LoadContent()
         {
-            _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            brown = this.Content.Load<Texture2D>("Brown");
-            yellow = this.Content.Load<Texture2D>("Yellow");
+            brown = Content.Load<Texture2D>("Brown");
+            yellow = Content.Load<Texture2D>("Yellow");
 
-            font = this.Content.Load<SpriteFont>("File");
+            font = Content.Load<SpriteFont>("File");
 
-            // TODO: use this.Content to load your game content here
         }
 
         protected override void Update(GameTime gameTime)
@@ -102,21 +82,21 @@ namespace SE_Platformer_unlocker
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            _spriteBatch.Begin();
+            SpriteBatch.Begin();
 
             foreach (IGameObject gameObject in LoadedObjects)
             {
                 if (gameObject is IVisible v)
                 {
-                    v.Draw(_spriteBatch);
+                    v.Draw(SpriteBatch);
                 }
             }
             foreach (IUiElement element in uiElements)
             {
-                    element.Draw(_spriteBatch);
+                    element.Draw(SpriteBatch);
             }
 
-            _spriteBatch.End();
+            SpriteBatch.End();
 
             // TODO: Add your drawing code here
 

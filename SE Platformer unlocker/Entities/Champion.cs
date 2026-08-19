@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Library;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SE_Platformer_unlocker.Base;
@@ -57,7 +58,7 @@ namespace SE_Platformer_unlocker.Entities
             nextPos.Offset(speed);
             // interact
             remainGrounded = false;
-            foreach (IGameObject gameObject in Game1.Instance.LoadedObjects)
+            foreach (IGameObject gameObject in (Core.Instance as Game1).LoadedObjects)
             {
                 if (gameObject is IInteractable)
                 {
