@@ -43,12 +43,19 @@
 /processorParam:TextureFormat=Color
 /build:Brown.png
 
-#begin File.spritefont
+#begin Fonts/File.spritefont
 /importer:FontDescriptionImporter
-/processor:LocalizedFontProcessor
+/processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:File.spritefont
+/build:Fonts/File.spritefont
+
+#begin Fonts/TitleFont.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:Fonts/TitleFont.spritefont
 
 #begin herochar_spritesheet(new).png
 /importer:TextureImporter
@@ -74,6 +81,9 @@
 /processorParam:TextureFormat=Color
 /build:spike.png
 
+#begin sprites/atlas-definition.xml
+/copy:sprites/atlas-definition.xml
+
 #begin sprites/atlas.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -86,11 +96,20 @@
 /processorParam:TextureFormat=Color
 /build:sprites/atlas.png
 
-#begin sprites/atlasDef.xml
-/copy:sprites/atlasDef.xml
+#begin sprites/background-pattern.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:sprites/background-pattern.png
 
-#begin sprites/TileMapDef.xml
-/copy:sprites/TileMapDef.xml
+#begin sprites/tilemap-definition.xml
+/copy:sprites/tilemap-definition.xml
 
 #begin Yellow.png
 /importer:TextureImporter
