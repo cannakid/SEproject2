@@ -2,14 +2,17 @@
 using Library.Graphics;
 using Library.Input;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using SE_Platformer_unlocker.Base;
 using SE_Platformer_unlocker.Blocks;
 using SE_Platformer_unlocker.Entities;
 using SE_Platformer_unlocker.UI;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace SE_Platformer_unlocker
 {
@@ -36,6 +39,18 @@ namespace SE_Platformer_unlocker
         // texture region that defines the bat sprite in the atlas.
         private AnimatedSprite _bat;
 
+        private TileMap _tileMap;
+
+        // Defines the bounds of the room that the slime and bat are contained within.
+        private Rectangle _roomBounds;
+
+        private SoundEffect _bounceSoundEffect;
+
+        // The sound effect to play when the slime eats a bat.
+        private SoundEffect _collectSoundEffect;
+
+        private Song _themeSong;
+
         public Game1() : base("Unlocker", false)
         {
             
@@ -44,6 +59,20 @@ namespace SE_Platformer_unlocker
         protected override void Initialize()
         {
             base.Initialize();
+
+            Rectangle screenBounds = GraphicsDevice.PresentationParameters.Bounds;
+
+            _roomBounds = new Rectangle(
+                 (int)_tileMap.TileWidth,
+                 (int)_tileMap.TileHeight,
+                 screenBounds.Width - (int)_tileMap.TileWidth * 2,
+                 screenBounds.Height - (int)_tileMap.TileHeight * 2
+             );
+
+            // Initial slime position will be the center tile of the tile map.
+            int centerRow = _tileMap.Rows / 2;
+            int centerColumn = _tileMap.Columns / 2;
+            _slimePosition = new Vector2(centerColumn * _tileMap.TileWidth, centerRow * _tileMap.TileHeight);
 
             LoadedObjects.Add(new Champion(yellow, new Point(0, 1200), new Point(50, 50)));
             LoadedObjects.Add(new Block(brown, new Point(0, 1300), new Point(1000, 50)));
@@ -65,10 +94,14 @@ namespace SE_Platformer_unlocker
             LoadedObjects.Add(new MovingPlatform(brown, rect, new Rectangle(rect.Location, rect.Size), new Point(600, 1200), new Point(1000, 1200), -1, 2));
 
             //uiElements.Add(new UIText("Hello world", new Rectangle(50, 50, 500, 100), font));
+
+            Audio.PlaySong(_themeSong);
         }
 
         protected override void LoadContent()
         {
+
+
 
             //  Create a TextureAtlas instance from the atlas
             TextureAtlas atlas = TextureAtlas.FromFile(Content, "sprites/atlasDef.xml");
@@ -87,6 +120,16 @@ namespace SE_Platformer_unlocker
 
             font = Content.Load<SpriteFont>("File");
 
+            _tileMap = TileMap.FromFile(Content, "sprites/tileMapDef.xml");
+            _tileMap.Scale = new Vector2(4.0f, 4.0f);
+
+            _bounceSoundEffect = Content.Load<SoundEffect>("audio/bounce");
+
+            // Load the collect sound effect
+            _collectSoundEffect = Content.Load<SoundEffect>("audio/collect");
+
+            // Load the background theme music
+            _themeSong = Content.Load<Song>("audio/theme");
         }
 
         protected override void Update(GameTime gameTime)
@@ -99,7 +142,7 @@ namespace SE_Platformer_unlocker
             {
                 if (gameObject is IDynamic d)
                 {
-                    d.Update();
+                    //d.Update();
                 }
             }
             _slime.Update(gameTime);
@@ -111,6 +154,29 @@ namespace SE_Platformer_unlocker
             // Check for gamepad input and handle it.
             CheckGamePadInput();
 
+            Rectangle slimeBounds = new Rectangle((int)_slimePosition.X, (int)_slimePosition.Y, (int)_slime.Width, (int)_slime.Height);
+
+            if (slimeBounds.Left < _roomBounds.Left)
+            {
+                Audio.PlaySoundEffect(_collectSoundEffect);
+                _slimePosition.X = _roomBounds.Left;
+            }
+            else if (slimeBounds.Right > _roomBounds.Right)
+            {
+                Audio.PlaySoundEffect(_collectSoundEffect);
+                _slimePosition.X = _roomBounds.Right - _slime.Width;
+            }
+
+            if (slimeBounds.Top < _roomBounds.Top)
+            {
+                Audio.PlaySoundEffect(_collectSoundEffect);
+                _slimePosition.Y = _roomBounds.Top;
+            }
+            else if (slimeBounds.Bottom > _roomBounds.Bottom)
+            {
+                Audio.PlaySoundEffect(_collectSoundEffect);
+                _slimePosition.Y = _roomBounds.Bottom - _slime.Height;
+            }
 
 
             base.Update(gameTime);
@@ -150,6 +216,26 @@ namespace SE_Platformer_unlocker
             if (Input.Keyboard.IsKeyDown(Keys.D) || Input.Keyboard.IsKeyDown(Keys.Right))
             {
                 _slimePosition.X += speed;
+            }
+
+
+            if (Input.Keyboard.WasKeyJustPressed(Keys.M))
+            {
+                Audio.ToggleMute();
+            }
+
+            // If the + button is pressed, increase the volume.
+            if (Input.Keyboard.WasKeyJustPressed(Keys.OemPlus))
+            {
+                Audio.SongVolume += 0.1f;
+                Audio.SoundEffectVolume += 0.1f;
+            }
+
+            // If the - button was pressed, decrease the volume.
+            if (Input.Keyboard.WasKeyJustPressed(Keys.OemMinus))
+            {
+                Audio.SongVolume -= 0.1f;
+                Audio.SoundEffectVolume -= 0.1f;
             }
         }
 
@@ -223,11 +309,15 @@ namespace SE_Platformer_unlocker
             {
                 element.Draw(SpriteBatch);
             }
+            
+            _tileMap.Draw(SpriteBatch);
 
             _slime.Draw(SpriteBatch, _slimePosition);
 
             // Draw the bat texture region 10px to the right of the slime at a scale of 4.0
             _bat.Draw(SpriteBatch, new Vector2(_slime.Width + 10, 0));
+
+            
 
             SpriteBatch.End();
 

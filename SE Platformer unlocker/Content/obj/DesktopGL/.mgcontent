@@ -4,6 +4,9 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
+    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/audio/bounce.wav</File>
+    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/audio/collect.wav</File>
+    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/audio/theme.ogg</File>
     <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/Brown.png</File>
     <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/File.spritefont</File>
     <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/herochar_spritesheet(new).png</File>
@@ -12,6 +15,9 @@
     <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/Yellow.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

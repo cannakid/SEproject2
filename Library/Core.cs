@@ -1,4 +1,5 @@
-﻿using Library.Input;
+﻿using Library.Audio;
+using Library.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -28,6 +29,8 @@ namespace Library
         public static InputManager Input { get; private set; }
 
         public static bool ExitOnEscape { get; set; }
+
+        public static AudioController Audio { get; private set; }
 
         public Core(string title, bool fullScreen)
         {
@@ -81,12 +84,24 @@ namespace Library
 
             // Create a new input manager.
             Input = new InputManager();
+
+            Audio = new AudioController();
+        }
+
+        protected override void UnloadContent()
+        {
+            // Dispose of the audio controller.
+            Audio.Dispose();
+
+            base.UnloadContent();
         }
 
         protected override void Update(GameTime gameTime)
         {
             // Update the input manager.
             Input.Update(gameTime);
+
+            Audio.Update();
 
             if (ExitOnEscape && Input.Keyboard.WasKeyJustPressed(Keys.Escape))
             {
