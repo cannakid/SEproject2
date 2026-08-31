@@ -17,14 +17,14 @@ namespace SE_Platformer_unlocker.Entities
         private Vector2 speed;
         private bool isGrounded;
         private bool remainGrounded = false;
-        private Rectangle nextPos;
+        public Rectangle NextPos;
 
         public Champion(Texture2D texture, Point pos, Point size)
         {
             Texture = texture;
             textureRect = new Rectangle(pos, size);
             hitBox = new Rectangle(pos, size);
-            nextPos = hitBox;
+            NextPos = hitBox;
         }
 
         public override void Update()
@@ -55,19 +55,20 @@ namespace SE_Platformer_unlocker.Entities
                 speed.Y -= 12;
                 isGrounded = false;
             }
-            nextPos.Offset(speed);
+            NextPos.Offset(speed);
             // interact
             remainGrounded = false;
             foreach (IGameObject gameObject in (Core.Instance as Game1).LoadedObjects)
             {
-                if (gameObject is IInteractable)
+                if (gameObject is IInteractable inter)
                 {
-                    Interact(gameObject as IInteractable);
+                    inter.Interact(this);
+                    Interact(inter);
                 }
             }
             isGrounded = remainGrounded;
-            hitBox = nextPos;
-            textureRect = nextPos;
+            hitBox = NextPos;
+            textureRect = NextPos;
         }
 
         public override void Interact(IInteractable interactable)
@@ -76,7 +77,7 @@ namespace SE_Platformer_unlocker.Entities
             {
                 remainGrounded = true;
             }
-            if (!interactable.HitBox.Intersects(nextPos))
+            if (!interactable.HitBox.Intersects(NextPos))
             {
                 return;
             }
@@ -85,22 +86,22 @@ namespace SE_Platformer_unlocker.Entities
                 speed.Y = 0;
                 isGrounded = true;
                 remainGrounded = true;
-                nextPos.Y = interactable.HitBox.Top - HitBox.Size.Y; // Y is top side
+                NextPos.Y = interactable.HitBox.Top - HitBox.Size.Y; // Y is top side
             }
             else if (HitBox.Top >= interactable.HitBox.Bottom)
             {
                 speed.Y = 0;
-                nextPos.Y = interactable.HitBox.Bottom;
+                NextPos.Y = interactable.HitBox.Bottom;
             }
             else if (HitBox.Right <= interactable.HitBox.Left)
             {
                 speed.X = 0;
-                nextPos.X = interactable.HitBox.Left - HitBox.Size.X; // X is left side
+                NextPos.X = interactable.HitBox.Left - HitBox.Size.X; // X is left side
             }
             else if (HitBox.Left >= interactable.HitBox.Right)
             {
                 speed.X = 0;
-                nextPos.X = interactable.HitBox.Right;
+                NextPos.X = interactable.HitBox.Right;
             }
         }
     }

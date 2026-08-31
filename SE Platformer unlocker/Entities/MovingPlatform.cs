@@ -68,7 +68,6 @@ namespace SE_Platformer_unlocker.Entities
             }
             currentSteps++;
             base.Update();
-            Debug.WriteLine(Speed);
         }
     }
 }
