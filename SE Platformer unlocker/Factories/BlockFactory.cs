@@ -17,6 +17,6 @@ namespace SE_Platformer_unlocker.Factories
 {
     public class BlockFactory
     {
-       
+        
     }
 }

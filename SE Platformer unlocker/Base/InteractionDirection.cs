@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace SE_Platformer_unlocker.Base
 {
-    public enum Interactions
+    public enum InteractionDirection
     {
         BOTTOM,
         TOP,
         LEFT,
-        RIGHT
+        RIGHT,
+        NONE
     }
 }

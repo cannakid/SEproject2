@@ -17,13 +17,9 @@ namespace SE_Platformer_unlocker.Blocks
 
         public Rectangle HitBox { get; private set; }
 
-        public Interactions Interact(IInteractable interactable)
+        public InteractionType Interact(InteractionDirection direction)
         {
-            if (interactable.HitBox.Intersects(HitBox))
-            {
-                return Interactions.BLOCK;
-            }
-            return Interactions.NONE;
+            return InteractionType.BLOCK;
         }
     }
 }

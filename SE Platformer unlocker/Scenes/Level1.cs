@@ -48,12 +48,12 @@ namespace SE_Platformer_unlocker.Scenes
 
             Rectangle screenBounds = Core.GraphicsDevice.PresentationParameters.Bounds;
 
-            _champ = new Champion(_champSprite, new Point(1000, 100), new Point(80, 80), this);
+            _champ = new Champion(_champSprite, new Point(100, 1000), new Point(80, 80), this);
 
             pauseButton = new UIIcon(new Sprite(new TextureRegion(pauseTexture, 0, 0, 600, 600)), new Rectangle(Core.WIDTH - 80, 80, 80, 80), () => { isPauseOpen = true; });
             pauseButton.CenterIcon();
 
-            test = new Block(0, 1280, Core.WIDTH, 160);
+            test = new Block(0, 1360, Core.WIDTH, 80);
             Interactables.Add(test);
         }
 
@@ -78,7 +78,7 @@ namespace SE_Platformer_unlocker.Scenes
             }
             else
             {
-                //_champ.Update(gameTime);
+                _champ.Update(gameTime);
 
                 // Check for keyboard input and handle it.
                 CheckKeyboardInput();
@@ -130,7 +130,7 @@ namespace SE_Platformer_unlocker.Scenes
 
             Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-            //_tileMap.Draw(Core.SpriteBatch);
+            _tileMap.Draw(Core.SpriteBatch);
 
             _champ.Draw(gameTime);
 

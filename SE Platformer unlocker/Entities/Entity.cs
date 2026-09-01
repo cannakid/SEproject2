@@ -27,7 +27,7 @@ namespace SE_Platformer_unlocker.Entities
             sprite.Draw(Core.SpriteBatch, hitBox.Location.ToVector2());
         }
 
-        public abstract Interactions Interact(IInteractable interactable);
+        public abstract InteractionType Interact(InteractionDirection direction);
         
 
         public virtual void Update(GameTime gameTime)

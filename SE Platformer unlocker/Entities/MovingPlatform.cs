@@ -40,9 +40,9 @@ namespace SE_Platformer_unlocker.Entities
             this.speed = speed * temp;
         }
 
-        public override Interactions Interact(IInteractable interactable)
+        public override InteractionType Interact(InteractionDirection direction)
         {
-            return Interactions.NONE;
+            return InteractionType.BLOCK;
         }
 
         public override void Update(GameTime gameTime)

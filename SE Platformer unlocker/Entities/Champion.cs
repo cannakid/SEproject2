@@ -50,10 +50,6 @@ namespace SE_Platformer_unlocker.Entities
             {
                 speed.Y += 0.5f;
             }
-            if (HitBox.Top > Game1.HEIGHT)
-            {
-                Game1.Instance.Exit(); // replace with game over screen
-            }
             if (isGrounded && Keyboard.GetState().IsKeyDown(Keys.W))
             {
                 speed.Y -= 12;
@@ -67,8 +63,12 @@ namespace SE_Platformer_unlocker.Entities
             {
                 if (!interactable.Equals(this))
                 {
-                    Interactions result = interactable.Interact(this);
-                    HandleResult(result);
+                    InteractionDirection direction = NextPos.CollisionDirection(interactable.HitBox, HitBox);
+                    if (direction != InteractionDirection.NONE)
+                    {
+                        InteractionType result = interactable.Interact(direction);
+                        HandleResult(result, direction, interactable);
+                    }
                 }
                 
             }
@@ -77,44 +77,57 @@ namespace SE_Platformer_unlocker.Entities
             
         }
 
-        public override Interactions Interact(IInteractable interactable)
+        public override InteractionType Interact(InteractionDirection direction)
         {
-            if (interactable.HitBox.Top == HitBox.Bottom + 1)
+            if (direction == InteractionDirection.BOTTOM)
             {
-                remainGrounded = true;
+                return InteractionType.HIT;
             }
-            if (!interactable.HitBox.Intersects(NextPos))
-            {
-                return Interactions.NONE;
-            }
-            if (HitBox.Bottom <= interactable.HitBox.Top)
-            {
-                speed.Y = 0;
-                isGrounded = true;
-                remainGrounded = true;
-                NextPos.Y = interactable.HitBox.Top - HitBox.Size.Y; // Y is top side
-            }
-            else if (HitBox.Top >= interactable.HitBox.Bottom)
-            {
-                speed.Y = 0;
-                NextPos.Y = interactable.HitBox.Bottom;
-            }
-            else if (HitBox.Right <= interactable.HitBox.Left)
-            {
-                speed.X = 0;
-                NextPos.X = interactable.HitBox.Left - HitBox.Size.X; // X is left side
-            }
-            else if (HitBox.Left >= interactable.HitBox.Right)
-            {
-                speed.X = 0;
-                NextPos.X = interactable.HitBox.Right;
-            }
-            return Interactions.BLOCK;
+            return InteractionType.NONE;
         }
 
-        private void HandleResult(Interactions interaction)
+        private void HandleResult(InteractionType type, InteractionDirection direction, IInteractable interactable)
         {
-
+            if (type == InteractionType.NONE)
+            {
+                return;
+            }
+            if (type == InteractionType.BLOCK)
+            {
+                if (direction == InteractionDirection.TOP)
+                {
+                    isGrounded = true;
+                    remainGrounded = true;
+                    speed.Y = 0;
+                    NextPos.Y = interactable.HitBox.Top - HitBox.Height;
+                }
+                else if (direction == InteractionDirection.BOTTOM)
+                {
+                    speed.Y = 0;
+                    NextPos.Y = interactable.HitBox.Bottom;
+                }
+                else if (direction == InteractionDirection.LEFT)
+                {
+                    speed.X = 0;
+                    NextPos.X = interactable.HitBox.Right - HitBox.Width;
+                }
+                else if (direction == InteractionDirection.RIGHT)
+                {
+                    speed.X = 0;
+                    NextPos.X = interactable.HitBox.Left;
+                }
+            }
+            else if (type == InteractionType.HIT)
+            {
+                if (interactable is Creature c)
+                {
+                    c.Health -= 1;
+                }
+            }
+            else if (type == InteractionType.PUSH)
+            {
+                // not yet implemented
+            }
         }
     }
 }

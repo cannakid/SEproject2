@@ -11,7 +11,20 @@ namespace SE_Platformer_unlocker.Entities
 
         }
 
+        public bool Alive => health > 0;
         private int health;
+        public int Health
+        {
+            get => health;
+            set
+            {
+                if (value <= 0)
+                {
+                    health = 0;
+                }
+                health = value;
+            }
+        }
 
     }
 }

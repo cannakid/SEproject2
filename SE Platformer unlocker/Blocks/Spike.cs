@@ -34,16 +34,13 @@ namespace SE_Platformer_unlocker.Blocks
             }
         }
 
-        public Interactions Interact(IInteractable interactable)
+        public InteractionType Interact(InteractionDirection direction)
         {
-            if (interactable is Champion ch)
+            if (direction == InteractionDirection.TOP)
             {
-                if (ch.NextPos.Intersects(HitBox))
-                {
-                    Game1.Instance.Exit();
-                }
+                return InteractionType.HIT;
             }
-            return Interactions.NONE;
+            return InteractionType.NONE;
         }
     }
 }
