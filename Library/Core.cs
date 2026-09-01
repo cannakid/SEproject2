@@ -130,6 +130,11 @@ namespace Library
             base.Update(gameTime);
         }
 
+        public void Quit()
+        {
+            Exit();
+        }
+
         protected override void Draw(GameTime gameTime)
         {
             // If there is an active scene, draw it.

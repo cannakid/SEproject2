@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Media;
 using SE_Platformer_unlocker.Base;
 using SE_Platformer_unlocker.Blocks;
 using SE_Platformer_unlocker.Entities;
+using SE_Platformer_unlocker.Managers;
 using SE_Platformer_unlocker.Scenes;
 using SE_Platformer_unlocker.UI;
 using System;
@@ -19,6 +20,7 @@ namespace SE_Platformer_unlocker
 {
     public class Game1 : Core
     {
+        public static InputInterpretter Interpretter { get; private set; }
 
         private Texture2D brown;
         private Texture2D yellow;
@@ -32,7 +34,7 @@ namespace SE_Platformer_unlocker
 
         public Game1() : base("Move Locked", false)
         {
-            
+            Interpretter = new InputInterpretter(Input);
         }
 
         protected override void Initialize()

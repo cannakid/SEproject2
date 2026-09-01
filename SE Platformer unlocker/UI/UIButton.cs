@@ -17,7 +17,6 @@ namespace SE_Platformer_unlocker.UI
             image.LayerDepth = text.LayerDepth + 1;
             this.position = rect.Location.ToVector2();
             this.button = rect;
-            button.Offset(-button.Width / 2, -button.Height / 2);
             this.action = action;
         }
 
@@ -30,6 +29,11 @@ namespace SE_Platformer_unlocker.UI
         private Action action;
 
         
+        public void CenterButton()
+        {
+            text.CenterText();
+            button.Offset(-button.Width / 2, -button.Height / 2);
+        }
 
         public void Draw(SpriteBatch spriteBatch)
         {

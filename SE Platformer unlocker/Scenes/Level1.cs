@@ -12,10 +12,7 @@ namespace SE_Platformer_unlocker.Scenes
 {
     public class Level1 : Scene
     {
-        private AnimatedSprite _slime;
-
-        // Defines the bat animated sprite.
-        private AnimatedSprite _bat;
+        private AnimatedSprite _champ;
 
         // Tracks the position of the slime.
         private Vector2 _slimePosition;

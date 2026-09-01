@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+	<Texture>sprites/hud</Texture>
+	<Regions>
+		<Region name="button" x="242" y="155" width="60" height="26" />
+	</Regions>
+	<Animations>
+		<Animation name="test" delay="200">
+			<Frame region="button" />
+		</Animation>
+	</Animations>
+</TextureAtlas>
+

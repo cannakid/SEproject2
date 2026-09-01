@@ -27,6 +27,12 @@ namespace Library.Graphics
 
         public float LayerDepth { get; set; } = 0f;
 
+        public void CenterText()
+        {
+            Vector2 size = Font.MeasureString(InnerText);
+            Origin = size * 0.5f;
+        }
+
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
             spriteBatch.DrawString(Font, InnerText, position, Color, Rotation, Origin, Scale, SpriteEffects.None, LayerDepth);
