@@ -1,25 +1,17 @@
 ﻿using Library.Graphics;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using SE_Platformer_unlocker.Base;
 
 
 namespace SE_Platformer_unlocker.Entities
 {
-    internal abstract class Creature : AnimatedSprite, IInteractable
+    internal abstract class Creature : Entity
     {
-        public Rectangle HitBox { get => hitBox; }
-        protected Rectangle hitBox;
+        protected Creature(Sprite sprite, Point pos, Point size) : base(sprite, new Rectangle(pos, size))
+        {
 
-        public Rectangle TextureRect { get => textureRect; }
-        protected Rectangle textureRect;
+        }
 
-        
+        private int health;
 
-        public abstract void Interact(IInteractable interactable);
-        
-
-        public abstract void Update();
-        
     }
 }

@@ -11,16 +11,8 @@ using System.Threading.Tasks;
 
 namespace SE_Platformer_unlocker.Entities
 {
-    internal class MovingPlatform : Sprite, IDynamic, IInteractable
+    internal class MovingPlatform : Entity
     {
-
-        public Texture2D Texture { get; set; }
-
-        public Rectangle TextureRect { get => textureRect; }
-
-        public Rectangle HitBox { get => TextureRect; }
-
-        protected Rectangle textureRect;
         private Vector2 speed;
 
         protected Vector2 moveSpeed;
@@ -28,18 +20,16 @@ namespace SE_Platformer_unlocker.Entities
         protected int currentSteps;
         protected bool inverse; // weather to go in the oposite direction
 
-        public MovingPlatform(Texture2D texture, Rectangle hitBox, Rectangle textureRect, Point min, Point max, float start, int speed)
+        public MovingPlatform(Sprite sprite, Rectangle hitBox, Point min, Point max, float start, int speed) : base(sprite, hitBox)
         {
-            this.Texture = texture;
-            this.textureRect = textureRect;
 
             if (start <= 0)
             {
-                this.textureRect.Location = min;
+                this.hitBox.Location = min;
             }
             if (start >= 1)
             {
-                this.textureRect.Location = max;
+                this.hitBox.Location = max;
             }
 
             Point distance = max - min;
@@ -50,19 +40,14 @@ namespace SE_Platformer_unlocker.Entities
             this.speed = speed * temp;
         }
 
-        public void Draw(SpriteBatch batch)
+        public override Interactions Interact(IInteractable interactable)
         {
-            batch.Draw(Texture, TextureRect, Color.White);
+            return Interactions.NONE;
         }
 
-        public void Interact(IInteractable interactable)
+        public override void Update(GameTime gameTime)
         {
-            
-        }
-
-        public void Update(GameTime gameTime)
-        {
-            textureRect.Location = HitBox.Location;
+            //hitBox.Location = HitBox.Location;
             if (currentSteps > steps)
             {
                 speed *= -1;

@@ -8,39 +8,22 @@ using SE_Platformer_unlocker.Entities;
 
 namespace SE_Platformer_unlocker.Blocks
 {
-    internal class Block : Sprite, IInteractable
+    public class Block : IInteractable
     {
-        public Block(Texture2D texture, Point pos, Point size)
+        public Block(int x, int y, int width, int height)
         {
-            //this.textureFile = textureFile;
-            Texture = texture;
-            TextureRect = new Rectangle(pos, size);
+            HitBox = new Rectangle(x, y, width, height);
         }
-        //private string textureFile;
 
-        public Texture2D Texture { get ; set; }
+        public Rectangle HitBox { get; private set; }
 
-        public Rectangle TextureRect { get; protected set; }
-
-        public Rectangle HitBox
+        public Interactions Interact(IInteractable interactable)
         {
-            get
+            if (interactable.HitBox.Intersects(HitBox))
             {
-                return TextureRect;
+                return Interactions.BLOCK;
             }
-        }
-
-        public void Draw(SpriteBatch batch)
-        {
-            if (Texture != null)
-            {
-                batch.Draw(Texture, TextureRect, Color.White);
-            }
-        }
-
-        public void Interact(IInteractable interactable)
-        {
-            
+            return Interactions.NONE;
         }
     }
 }

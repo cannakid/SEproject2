@@ -1,8 +1,10 @@
 ﻿using Library;
+using Library.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SE_Platformer_unlocker.Base;
+using SE_Platformer_unlocker.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -12,23 +14,25 @@ using System.Threading.Tasks;
 
 namespace SE_Platformer_unlocker.Entities
 {
-    internal class Champion : Creature
+    internal class Champion : Entity
     {
         private Vector2 speed;
         private bool isGrounded;
         private bool remainGrounded = false;
+
+        private LevelScene scene;
+
         public Rectangle NextPos;
 
-        public Champion(Texture2D texture, Point pos, Point size)
+        public Champion(Sprite sprite, Point pos, Point size, LevelScene scene) : base(sprite, new Rectangle(pos, size))
         {
-            //Texture = texture;
-            textureRect = new Rectangle(pos, size);
-            hitBox = new Rectangle(pos, size);
             NextPos = hitBox;
+            this.scene = scene;
         }
 
-        public override void Update()
+        public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 speed.X += 1;
@@ -46,7 +50,7 @@ namespace SE_Platformer_unlocker.Entities
             {
                 speed.Y += 0.5f;
             }
-            if (TextureRect.Top > Game1.HEIGHT)
+            if (HitBox.Top > Game1.HEIGHT)
             {
                 Game1.Instance.Exit(); // replace with game over screen
             }
@@ -58,21 +62,22 @@ namespace SE_Platformer_unlocker.Entities
             NextPos.Offset(speed);
             // interact
             remainGrounded = false;
-            /*
-            foreach (IGameObject gameObject in (Core.Instance as Game1).LoadedObjects)
+            
+            foreach (IInteractable interactable in scene.Interactables)
             {
-                if (gameObject is IInteractable inter)
+                if (!interactable.Equals(this))
                 {
-                    inter.Interact(this);
-                    Interact(inter);
+                    Interactions result = interactable.Interact(this);
+                    HandleResult(result);
                 }
-            }*/
+                
+            }
             isGrounded = remainGrounded;
             hitBox = NextPos;
-            textureRect = NextPos;
+            
         }
 
-        public override void Interact(IInteractable interactable)
+        public override Interactions Interact(IInteractable interactable)
         {
             if (interactable.HitBox.Top == HitBox.Bottom + 1)
             {
@@ -80,7 +85,7 @@ namespace SE_Platformer_unlocker.Entities
             }
             if (!interactable.HitBox.Intersects(NextPos))
             {
-                return;
+                return Interactions.NONE;
             }
             if (HitBox.Bottom <= interactable.HitBox.Top)
             {
@@ -104,6 +109,12 @@ namespace SE_Platformer_unlocker.Entities
                 speed.X = 0;
                 NextPos.X = interactable.HitBox.Right;
             }
+            return Interactions.BLOCK;
+        }
+
+        private void HandleResult(Interactions interaction)
+        {
+
         }
     }
 }

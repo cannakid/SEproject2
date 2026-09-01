@@ -12,7 +12,6 @@ namespace SE_Platformer_unlocker.Scenes
 {
     internal class TitleScene : Scene
     {
-        
         private SpriteFont _titleFont;
 
         private SpriteFont _normalFont;
@@ -112,10 +111,8 @@ namespace SE_Platformer_unlocker.Scenes
 
         public override void LoadContent()
         {
-            // Load the font for the standard text.
             _normalFont = Core.Content.Load<SpriteFont>("fonts/InstructionFont");
 
-            // Load the font for the start instruction
             _titleFont = Core.Content.Load<SpriteFont>("fonts/TitleFont");
 
             // Load the background pattern texture.
@@ -169,8 +166,6 @@ namespace SE_Platformer_unlocker.Scenes
 
         public override void Draw(GameTime gameTime)
         {
-            Vector2 test = Vector2.Zero;
-            test.ToPoint();
             Core.GraphicsDevice.Clear(new Color(32, 40, 78, 255));
 
             // Background

@@ -34,7 +34,7 @@ namespace SE_Platformer_unlocker.Blocks
             }
         }
 
-        public void Interact(IInteractable interactable)
+        public Interactions Interact(IInteractable interactable)
         {
             if (interactable is Champion ch)
             {
@@ -42,8 +42,8 @@ namespace SE_Platformer_unlocker.Blocks
                 {
                     Game1.Instance.Exit();
                 }
-                    
             }
+            return Interactions.NONE;
         }
     }
 }

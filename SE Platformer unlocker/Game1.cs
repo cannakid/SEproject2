@@ -22,6 +22,8 @@ namespace SE_Platformer_unlocker
     {
         public static InputInterpretter Interpretter { get; private set; }
 
+        //public static SizeManager SizeManager { get; private set; }
+
         private Texture2D brown;
         private Texture2D yellow;
         private Texture2D spike;
@@ -42,6 +44,7 @@ namespace SE_Platformer_unlocker
             base.Initialize();
 
             Interpretter = new InputInterpretter(Input);
+            //SizeManager = new SizeManager();
             /*
             LoadedObjects.Add(new Champion(yellow, new Point(0, 1200), new Point(50, 50)));
             LoadedObjects.Add(new Block(brown, new Point(0, 1300), new Point(1000, 50)));
