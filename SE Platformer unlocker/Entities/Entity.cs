@@ -3,6 +3,7 @@ using Library.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SE_Platformer_unlocker.Base;
+using SE_Platformer_unlocker.Scenes;
 using System.Diagnostics;
 
 
@@ -10,11 +11,14 @@ namespace SE_Platformer_unlocker.Entities
 {
     internal abstract class Entity : IDynamic, IInteractable
     {
-        public Entity(Sprite sprite, Rectangle hitBox)
+        protected LevelScene scene;
+
+        public Entity(Sprite sprite, Rectangle hitBox, LevelScene scene)
         {
             this.sprite = sprite;
             this.hitBox = hitBox;
             sprite.Scale = new Vector2((float)hitBox.Width / sprite.Region.Width, (float)hitBox.Height / sprite.Region.Height);
+            this.scene = scene;
         }
 
         private Sprite sprite;

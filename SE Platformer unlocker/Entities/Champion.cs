@@ -1,6 +1,7 @@
 ﻿using Library;
 using Library.Graphics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SE_Platformer_unlocker.Base;
@@ -20,14 +21,14 @@ namespace SE_Platformer_unlocker.Entities
         private bool isGrounded;
         private bool remainGrounded = false;
 
-        private LevelScene scene;
+        private SoundEffect jumpSound;
 
         public Rectangle NextPos;
 
-        public Champion(Sprite sprite, Point pos, Point size, LevelScene scene) : base(sprite, new Rectangle(pos, size))
+        public Champion(Sprite sprite, Point pos, Point size, LevelScene scene, SoundEffect jump) : base(sprite, new Rectangle(pos, size), scene)
         {
             NextPos = hitBox;
-            this.scene = scene;
+            jumpSound = jump;
         }
 
         public override void Update(GameTime gameTime)
@@ -52,6 +53,7 @@ namespace SE_Platformer_unlocker.Entities
             }
             if (isGrounded && Keyboard.GetState().IsKeyDown(Keys.W))
             {
+                Core.Audio.PlaySoundEffect(jumpSound);
                 speed.Y -= 12;
                 isGrounded = false;
             }
@@ -109,12 +111,12 @@ namespace SE_Platformer_unlocker.Entities
                 else if (direction == InteractionDirection.LEFT)
                 {
                     speed.X = 0;
-                    NextPos.X = interactable.HitBox.Right - HitBox.Width;
+                    NextPos.X = interactable.HitBox.Left - HitBox.Width;
                 }
                 else if (direction == InteractionDirection.RIGHT)
                 {
                     speed.X = 0;
-                    NextPos.X = interactable.HitBox.Left;
+                    NextPos.X = interactable.HitBox.Right;
                 }
             }
             else if (type == InteractionType.HIT)

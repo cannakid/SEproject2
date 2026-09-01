@@ -25,8 +25,18 @@ namespace Library.Graphics
             _tiles = new int[Count];
         }
 
-        private readonly TileSet _tileset;
-        private readonly int[] _tiles;
+        public TileMap(TileMap map)
+        {
+            _tileset = map._tileset;
+            Rows = map.Rows;
+            Columns = map.Columns;
+            Count = map.Count;
+            Scale = map.Scale;
+            _tiles = map._tiles;
+        }
+
+        protected readonly TileSet _tileset;
+        protected readonly int[] _tiles;
 
         public int Rows { get; }
 

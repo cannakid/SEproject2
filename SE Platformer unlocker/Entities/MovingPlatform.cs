@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SE_Platformer_unlocker.Base;
+using SE_Platformer_unlocker.Scenes;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,7 +21,7 @@ namespace SE_Platformer_unlocker.Entities
         protected int currentSteps;
         protected bool inverse; // weather to go in the oposite direction
 
-        public MovingPlatform(Sprite sprite, Rectangle hitBox, Point min, Point max, float start, int speed) : base(sprite, hitBox)
+        public MovingPlatform(Sprite sprite, Rectangle hitBox, Point min, Point max, float start, int speed, LevelScene scene) : base(sprite, hitBox, scene)
         {
 
             if (start <= 0)

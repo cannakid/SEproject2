@@ -21,7 +21,7 @@ namespace SE_Platformer_unlocker.Scenes
         private Champion _champ;
 
         // Defines the tilemap to draw.
-        private TileMap _tileMap;
+        private BlockMap _blockMap;
 
         // Defines the bounds of the room that the slime and bat are contained within.
         private Rectangle _roomBounds;
@@ -37,7 +37,8 @@ namespace SE_Platformer_unlocker.Scenes
         private UIIcon pauseButton;
         private Texture2D pauseTexture;
 
-        private Block test;
+
+        //private Block test;
 
         public override void Initialize()
         {
@@ -48,13 +49,20 @@ namespace SE_Platformer_unlocker.Scenes
 
             Rectangle screenBounds = Core.GraphicsDevice.PresentationParameters.Bounds;
 
-            _champ = new Champion(_champSprite, new Point(100, 1000), new Point(80, 80), this);
+            _champ = new Champion(_champSprite, new Point(100, 1000), new Point(80, 80), this, _jumpSoundEffect);
 
             pauseButton = new UIIcon(new Sprite(new TextureRegion(pauseTexture, 0, 0, 600, 600)), new Rectangle(Core.WIDTH - 80, 80, 80, 80), () => { isPauseOpen = true; });
             pauseButton.CenterIcon();
 
-            test = new Block(0, 1360, Core.WIDTH, 80);
-            Interactables.Add(test);
+            //test = new Block(0, 1360, Core.WIDTH, 80);
+            //Interactables.Add(test);
+
+            List<Block> blocks = _blockMap.CreateBlocks();
+            foreach (Block b in blocks)
+            {
+                Interactables.Add(b);
+            }
+
         }
 
         public override void LoadContent()
@@ -64,10 +72,13 @@ namespace SE_Platformer_unlocker.Scenes
             _champSprite = idle.CreateAnimatedSprite("idle-animation");
 
             // Create the tilemap from the XML configuration file.
-            _tileMap = TileMap.FromFile(Content, "sprites/tilemap-definition.xml");
-            _tileMap.Scale = new Vector2(5f, 5f);
+            TileMap _tileMap = TileMap.FromFile(Content, "sprites/tilemap-definition.xml");
+            _blockMap = new BlockMap(_tileMap);
+            _blockMap.Scale = new Vector2(5f, 5f);
 
             pauseTexture = Content.Load<Texture2D>("sprites/options_icon");
+
+            _jumpSoundEffect = Content.Load<SoundEffect>("audio/jump");
         }
 
         public override void Update(GameTime gameTime)
@@ -130,7 +141,7 @@ namespace SE_Platformer_unlocker.Scenes
 
             Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
-            _tileMap.Draw(Core.SpriteBatch);
+            _blockMap.Draw(Core.SpriteBatch);
 
             _champ.Draw(gameTime);
 

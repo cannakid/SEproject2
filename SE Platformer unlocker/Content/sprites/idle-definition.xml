@@ -2,10 +2,10 @@
 <TextureAtlas>
 	<Texture>sprites/Idle-Sheet</Texture>
 	<Regions>
-		<Region name="idle-1" x="0" y="0" width="64" height="64" />
-		<Region name="idle-2" x="64" y="0" width="64" height="64" />
-		<Region name="idle-3" x="128" y="0" width="64" height="64" />
-		<Region name="idle-4" x="192" y="0" width="64" height="64" />
+		<Region name="idle-1" x="16" y="16" width="32" height="48" />
+		<Region name="idle-2" x="80" y="16" width="32" height="48" />
+		<Region name="idle-3" x="144" y="16" width="32" height="48" />
+		<Region name="idle-4" x="208" y="16" width="32" height="48" />
 	</Regions>
 	<Animations>
 		<Animation name="idle-animation" delay="200">
