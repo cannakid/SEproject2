@@ -10,7 +10,7 @@ using System;
 
 namespace SE_Platformer_unlocker.Scenes
 {
-    public class GameScene : Scene
+    public class Level1 : Scene
     {
         private AnimatedSprite _slime;
 
@@ -55,7 +55,6 @@ namespace SE_Platformer_unlocker.Scenes
             int centerRow = _tileMap.Rows / 2;
             int centerColumn = _tileMap.Columns / 2;
             _slimePosition = new Vector2(centerColumn * _tileMap.TileWidth, centerRow * _tileMap.TileHeight);
-
         }
 
         public override void LoadContent()

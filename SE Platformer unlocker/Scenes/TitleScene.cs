@@ -4,6 +4,7 @@ using Library.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System.Diagnostics;
 
 namespace SE_Platformer_unlocker.Scenes
 {
@@ -11,6 +12,8 @@ namespace SE_Platformer_unlocker.Scenes
     {
         private Text titleTop;
         private Text titleBottom;
+        private Text titleTopShadow;
+        private Text titleBottomShadow;
         private Text instructionText;
 
         private SpriteFont _titleFont;
@@ -20,15 +23,14 @@ namespace SE_Platformer_unlocker.Scenes
         // The texture used for the background pattern.
         private Texture2D _backgroundPattern;
 
-        // The destination rectangle for the background pattern to fill.
-        private Rectangle _backgroundDestination;
+        private Sprite _background;
 
         // The offset to apply when drawing the background pattern so it appears to
         // be scrolling.
         private Vector2 _backgroundOffset;
 
         // The speed that the background pattern scrolls.
-        private float _scrollSpeed = 50.0f;
+        private float _scrollSpeed = 20f;
 
         public override void Initialize()
         {
@@ -44,22 +46,29 @@ namespace SE_Platformer_unlocker.Scenes
             Vector2 size = _titleFont.MeasureString(title1);
             titleTop.Origin = size * 0.5f;
 
+            titleTopShadow = new Text(_titleFont, title1);
+            titleTopShadow.Origin = size * 0.5f;
+            titleTopShadow.Color = Color.Black;
+            titleTopShadow.LayerDepth = 1;
+
             string title2 = "Locked";
             titleBottom = new Text(_titleFont, title2);
             size = _titleFont.MeasureString(title2);
             titleBottom.Origin = size * 0.5f;
+
+            titleBottomShadow = new Text(_titleFont, title2);
+            titleBottomShadow.Origin = size * 0.5f;
+            titleBottomShadow.Color = Color.Black;
+            titleBottomShadow.LayerDepth = 1;
 
             string instruction = "Press Enter To Start";
             instructionText = new Text(_instructionFont, instruction);
             size = _instructionFont.MeasureString(instruction);
             instructionText.Origin = size * 0.5f;
 
-            // Initialize the offset of the background pattern at zero.
-            _backgroundOffset = Vector2.Zero;
 
-            // Set the background pattern destination rectangle to fill the entire
-            // screen background.
-            _backgroundDestination = Core.GraphicsDevice.PresentationParameters.Bounds;
+            _background = new Sprite(new TextureRegion(_backgroundPattern, 0, 0, 480, 272));
+            _background.Scale = new Vector2(Core.WIDTH / _background.Width, Core.HEIGHT / _background.Height);
         }
 
         public override void LoadContent()
@@ -71,7 +80,7 @@ namespace SE_Platformer_unlocker.Scenes
             _titleFont = Core.Content.Load<SpriteFont>("fonts/TitleFont");
 
             // Load the background pattern texture.
-            _backgroundPattern = Content.Load<Texture2D>("sprites/background-pattern");
+            _backgroundPattern = Content.Load<Texture2D>("sprites/Background");
         }
 
         public override void Update(GameTime gameTime)
@@ -86,37 +95,37 @@ namespace SE_Platformer_unlocker.Scenes
             // scrolls down and to the right.
             float offset = _scrollSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             _backgroundOffset.X -= offset;
-            _backgroundOffset.Y -= offset;
+            _backgroundOffset.X %= _background.Width;
 
-            // Ensure that the offsets do not go beyond the texture bounds so it is
-            // a seamless wrap.
-            _backgroundOffset.X %= _backgroundPattern.Width;
-            _backgroundOffset.Y %= _backgroundPattern.Height;
+            _background.Region.SourceRectangle = new Rectangle(_backgroundOffset.ToPoint(), _background.Region.SourceRectangle.Size);
         }
 
         public override void Draw(GameTime gameTime)
         {
+            Vector2 test = Vector2.Zero;
+            test.ToPoint();
             Core.GraphicsDevice.Clear(new Color(32, 40, 78, 255));
 
             // Draw the background pattern first using the PointWrap sampler state.
             Core.SpriteBatch.Begin(samplerState: SamplerState.PointWrap);
-            Core.SpriteBatch.Draw(_backgroundPattern, _backgroundDestination, new Rectangle(_backgroundOffset.ToPoint(), _backgroundDestination.Size), Color.White * 0.5f);
+            _background.Draw(Core.SpriteBatch, Vector2.Zero);
             Core.SpriteBatch.End();
 
 
             // Begin the sprite batch to prepare for rendering.
-            Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+            Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
 
             // The color to use for the drop shadow text.
             Color dropShadowColor = Color.Black * 0.5f;
 
             int center = Core.WIDTH / 2;
 
-            //Core.SpriteBatch.DrawString(_titleFont, DUNGEON_TEXT, _dungeonTextPos + new Vector2(10, 10), dropShadowColor, 0.0f, _dungeonTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
             titleTop.Draw(Core.SpriteBatch, new Vector2(center, Core.HEIGHT / 5));
-            titleBottom.Draw(Core.SpriteBatch, new Vector2(center, (int)(1.5f * Core.HEIGHT / 5)));
+            titleTopShadow.Draw(Core.SpriteBatch, new Vector2(center, Core.HEIGHT / 5) + new Vector2(10, 10));
 
-            //Core.SpriteBatch.DrawString(_titleFont, SLIME_TEXT, _slimeTextPos + new Vector2(10, 10), dropShadowColor, 0.0f, _slimeTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
+            titleBottom.Draw(Core.SpriteBatch, new Vector2(center, (int)(1.5f * Core.HEIGHT / 5)));
+            titleBottomShadow.Draw(Core.SpriteBatch, new Vector2(center, (int)(1.5f * Core.HEIGHT / 5)) + new Vector2(10, 10));
+
 
             instructionText.Draw(Core.SpriteBatch, new Vector2(center, 2 * Core.HEIGHT / 5));
 

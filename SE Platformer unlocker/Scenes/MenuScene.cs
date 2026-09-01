@@ -31,7 +31,7 @@ namespace SE_Platformer_unlocker.Scenes
             buttonSprite.CenterOrigin();
             buttonSprite.Scale = new Vector2(4f, 4f);
             
-            start = new UIButton(startText, buttonSprite, new Rectangle((Core.WIDTH / 2) - ((int)buttonSprite.Width / 2), Core.HEIGHT / 2 - ((int)buttonSprite.Height / 2), (int)buttonSprite.Width, (int)buttonSprite.Height), () => { Core.ChangeScene(new GameScene()); });
+            start = new UIButton(startText, buttonSprite, new Rectangle((Core.WIDTH / 2) - ((int)buttonSprite.Width / 2), Core.HEIGHT / 2 - ((int)buttonSprite.Height / 2), (int)buttonSprite.Width, (int)buttonSprite.Height), () => { Core.ChangeScene(new Level1()); });
         }
 
         public override void LoadContent()

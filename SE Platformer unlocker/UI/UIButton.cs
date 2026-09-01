@@ -15,7 +15,9 @@ namespace SE_Platformer_unlocker.UI
             this.text = text;
             this.image = sprite;
             image.LayerDepth = text.LayerDepth + 1;
+            this.position = rect.Location.ToVector2();
             this.button = rect;
+            button.Offset(-button.Width / 2, -button.Height / 2);
             this.action = action;
         }
 
@@ -23,10 +25,11 @@ namespace SE_Platformer_unlocker.UI
         private Text text;
         private Sprite image;
         private Rectangle button;
+        private Vector2 position;
 
         private Action action;
 
-        private Vector2 position => button.Location.ToVector2();
+        
 
         public void Draw(SpriteBatch spriteBatch)
         {

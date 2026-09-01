@@ -30,7 +30,7 @@ namespace SE_Platformer_unlocker
 
         private Song _themeSong;
 
-        public Game1() : base("Unlocker", false)
+        public Game1() : base("Move Locked", false)
         {
             
         }
@@ -72,23 +72,11 @@ namespace SE_Platformer_unlocker
             spike = Content.Load<Texture2D>("Spike");
 
             // Load the background theme music
-            _themeSong = Content.Load<Song>("audio/theme");
+            _themeSong = Content.Load<Song>("audio/time_for_adventure");
         }
-
+        /*
         protected override void Update(GameTime gameTime)
         {
-
-            // TODO: Add your update logic here
-            foreach (IGameObject gameObject in LoadedObjects)
-            {
-                if (gameObject is IDynamic d)
-                {
-                    //d.Update();
-                }
-            }
-           
-
-
             base.Update(gameTime);
         }
 
@@ -96,32 +84,8 @@ namespace SE_Platformer_unlocker
 
         protected override void Draw(GameTime gameTime)
         {
-            /*
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            SpriteBatch.Begin();
-
-            foreach (IGameObject gameObject in LoadedObjects)
-            {
-                if (gameObject is IVisible v)
-                {
-                    v.Draw(SpriteBatch);
-                }
-            }
-            foreach (IUiElement element in uiElements)
-            {
-                element.Draw(SpriteBatch);
-            }
-            
-            
-
-            
-
-            SpriteBatch.End();
-            
-            // TODO: Add your drawing code here
-*/
             base.Draw(gameTime);
         }
+        */
     }
 }
