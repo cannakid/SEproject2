@@ -60,7 +60,7 @@ namespace SE_Platformer_unlocker.Entities
             
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             textureRect.Location = HitBox.Location;
             if (currentSteps > steps)

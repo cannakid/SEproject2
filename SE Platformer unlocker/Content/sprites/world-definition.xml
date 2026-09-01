@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+	<Texture>sprites/world_tileset</Texture>
+	<Regions>
+		<Region name="grass" x="0" y="0" width="16" height="16" />
+		<Region name="cracked-1" x="16" y="0" width="16" height="16" />
+		<Region name="cracked-2" x="16" y="16" width="16" height="16" />
+		<Region name="dirt" x="0" y="16" width="16" height="16" />
+	</Regions>
+	<Animations>
+		
+	</Animations>
+</TextureAtlas>

@@ -26,21 +26,23 @@ namespace SE_Platformer_unlocker
         private Texture2D yellow;
         private Texture2D spike;
 
-        public List<IGameObject> LoadedObjects = new List<IGameObject>();
+        
         public List<IUiElement> uiElements = new List<IUiElement>();
         
 
         private Song _themeSong;
 
-        public Game1() : base("Move Locked", false)
+        public Game1() : base("Move Locked", true)
         {
-            Interpretter = new InputInterpretter(Input);
+            
         }
 
         protected override void Initialize()
         {
             base.Initialize();
 
+            Interpretter = new InputInterpretter(Input);
+            /*
             LoadedObjects.Add(new Champion(yellow, new Point(0, 1200), new Point(50, 50)));
             LoadedObjects.Add(new Block(brown, new Point(0, 1300), new Point(1000, 50)));
             LoadedObjects.Add(new Block(brown, new Point(200, 1225), new Point(50, 75)));
@@ -48,18 +50,18 @@ namespace SE_Platformer_unlocker
             LoadedObjects.Add(new Block(brown, new Point(800, 1100), new Point(500, 50)));
             LoadedObjects.Add(new Block(brown, new Point(1300, 700), new Point(200, 25)));
             LoadedObjects.Add(new Block(brown, new Point(1200, 900), new Point(100, 50)));
-            LoadedObjects.Add(new Spike(spike, new Point(350, 1150), new Point(50, 50)));
-            /*LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
+            LoadedObjects.Add(new Spike(spike, new Point(350, 1000), new Point(50, 50)));
             LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
             LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
             LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
             LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
-            LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));*/
+            LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
+            LoadedObjects.Add(new Block(brown, new Point(500, 1250), new Point(100, 50)));
 
             Rectangle rect = new Rectangle(new Point(600, 1200), new Point(120, 20));
 
             LoadedObjects.Add(new MovingPlatform(brown, rect, new Rectangle(rect.Location, rect.Size), new Point(600, 1200), new Point(1000, 1200), -1, 2));
-
+            */
             //uiElements.Add(new UIText("Hello world", new Rectangle(50, 50, 500, 100), font));
 
             Audio.PlaySong(_themeSong);
@@ -76,12 +78,13 @@ namespace SE_Platformer_unlocker
             // Load the background theme music
             _themeSong = Content.Load<Song>("audio/time_for_adventure");
         }
-        /*
+        
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            Interpretter.Update(gameTime);
         }
-
+        /*
        
 
         protected override void Draw(GameTime gameTime)

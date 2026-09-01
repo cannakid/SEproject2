@@ -13,17 +13,29 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin audio/bounce.wav
+#begin audio/coin.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:audio/bounce.wav
+/build:audio/coin.wav
 
-#begin audio/collect.wav
+#begin audio/hurt.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:audio/collect.wav
+/build:audio/hurt.wav
+
+#begin audio/jump.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/jump.wav
+
+#begin audio/power_up.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:audio/power_up.wav
 
 #begin audio/time_for_adventure.mp3
 /importer:Mp3Importer
@@ -91,18 +103,6 @@
 #begin sprites/atlas-definition.xml
 /copy:sprites/atlas-definition.xml
 
-#begin sprites/atlas.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:sprites/atlas.png
-
 #begin sprites/Background.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -132,6 +132,21 @@
 
 #begin sprites/tilemap-definition.xml
 /copy:sprites/tilemap-definition.xml
+
+#begin sprites/world_tileset.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:sprites/world_tileset.png
+
+#begin sprites/world-definition.xml
+/copy:sprites/world-definition.xml
 
 #begin Yellow.png
 /importer:TextureImporter

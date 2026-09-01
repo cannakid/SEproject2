@@ -61,24 +61,29 @@ namespace SE_Platformer_unlocker.Scenes
             string title1 = "Move";
             titleTop = new Text(_titleFont, title1);
             titleTop.CenterText();
+            
 
             titleTopShadow = new Text(_titleFont, title1);
             titleTopShadow.CenterText();
             titleTopShadow.Color = Color.Black * 0.5f;
             titleTopShadow.LayerDepth = 1;
+            
 
             string title2 = "Locked";
             titleBottom = new Text(_titleFont, title2);
             titleBottom.CenterText();
+            
 
             titleBottomShadow = new Text(_titleFont, title2);
             titleBottomShadow.CenterText();
             titleBottomShadow.Color = Color.Black * 0.5f;
             titleBottomShadow.LayerDepth = 1;
+            
 
             string instruction = "Press Enter To Start";
             instructionText = new Text(_normalFont, instruction);
             instructionText.CenterText();
+            
 
 
             _background = new Sprite(new TextureRegion(_backgroundTexture, 0, 0, 480, 272));
@@ -137,7 +142,7 @@ namespace SE_Platformer_unlocker.Scenes
 
             _background.Region.SourceRectangle = new Rectangle(_backgroundOffset.ToPoint(), _background.Region.SourceRectangle.Size);
 
-            // handels going to the menu screen
+            // handels the menu screen
             Menu(gameTime);
         }
 
@@ -156,9 +161,9 @@ namespace SE_Platformer_unlocker.Scenes
             }
             else if (inMenu)
             {
-                start.Update();
-                options.Update();
-                quit.Update();
+                start.Update(gameTime);
+                options.Update(gameTime);
+                quit.Update(gameTime);
             }
         }
 

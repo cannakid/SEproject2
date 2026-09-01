@@ -5,7 +5,7 @@
 		<Region name="button" x="242" y="155" width="60" height="26" />
 	</Regions>
 	<Animations>
-		<Animation name="test" delay="200">
+		<Animation name="test" delay="215">
 			<Frame region="button" />
 		</Animation>
 	</Animations>

@@ -41,7 +41,7 @@ namespace SE_Platformer_unlocker.UI
             image.Draw(spriteBatch, position);
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             if (Core.Input.Mouse.WasButtonJustPressed(MouseButton.Left))
             {

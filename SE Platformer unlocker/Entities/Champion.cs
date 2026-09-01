@@ -21,7 +21,7 @@ namespace SE_Platformer_unlocker.Entities
 
         public Champion(Texture2D texture, Point pos, Point size)
         {
-            Texture = texture;
+            //Texture = texture;
             textureRect = new Rectangle(pos, size);
             hitBox = new Rectangle(pos, size);
             NextPos = hitBox;
@@ -58,6 +58,7 @@ namespace SE_Platformer_unlocker.Entities
             NextPos.Offset(speed);
             // interact
             remainGrounded = false;
+            /*
             foreach (IGameObject gameObject in (Core.Instance as Game1).LoadedObjects)
             {
                 if (gameObject is IInteractable inter)
@@ -65,7 +66,7 @@ namespace SE_Platformer_unlocker.Entities
                     inter.Interact(this);
                     Interact(inter);
                 }
-            }
+            }*/
             isGrounded = remainGrounded;
             hitBox = NextPos;
             textureRect = NextPos;

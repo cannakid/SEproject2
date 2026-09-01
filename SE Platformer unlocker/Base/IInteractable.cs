@@ -2,7 +2,7 @@
 
 namespace SE_Platformer_unlocker.Base
 {
-    internal interface IInteractable : IGameObject
+    public interface IInteractable
     {
         public Rectangle HitBox { get; }
         public void Interact(IInteractable interactable);

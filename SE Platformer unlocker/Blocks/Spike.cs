@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace SE_Platformer_unlocker.Blocks
 {
-    internal class Spike : Sprite, IGameObject, IInteractable
+    internal class Spike : Sprite,  IInteractable
     {
         public Spike(Texture2D texture, Point pos, Point size)
         {

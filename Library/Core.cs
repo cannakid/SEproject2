@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Diagnostics;
 
 
 namespace Library
@@ -55,6 +56,8 @@ namespace Library
             // Set the graphics defaults.
             Graphics.PreferredBackBufferWidth = WIDTH;
             Graphics.PreferredBackBufferHeight = HEIGHT;
+            Debug.WriteLine(WIDTH);
+            Debug.WriteLine(HEIGHT);
             Graphics.IsFullScreen = fullScreen;
 
             // Apply the graphic presentation changes.

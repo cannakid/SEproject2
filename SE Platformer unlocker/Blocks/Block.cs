@@ -8,7 +8,7 @@ using SE_Platformer_unlocker.Entities;
 
 namespace SE_Platformer_unlocker.Blocks
 {
-    internal class Block : Sprite, IGameObject,  IInteractable
+    internal class Block : Sprite, IInteractable
     {
         public Block(Texture2D texture, Point pos, Point size)
         {
