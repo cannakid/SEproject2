@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Library.Graphics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SE_Platformer_unlocker.Base;
 using System;
@@ -10,13 +11,17 @@ using System.Threading.Tasks;
 
 namespace SE_Platformer_unlocker.Entities
 {
-    internal class MovingPlatform : Entity, IVisible
+    internal class MovingPlatform : Sprite, IDynamic, IInteractable
     {
 
         public Texture2D Texture { get; set; }
 
         public Rectangle TextureRect { get => textureRect; }
+
+        public Rectangle HitBox { get => TextureRect; }
+
         protected Rectangle textureRect;
+        private Vector2 speed;
 
         protected Vector2 moveSpeed;
         protected int steps;
@@ -26,17 +31,14 @@ namespace SE_Platformer_unlocker.Entities
         public MovingPlatform(Texture2D texture, Rectangle hitBox, Rectangle textureRect, Point min, Point max, float start, int speed)
         {
             this.Texture = texture;
-            this.hitBox = hitBox;
             this.textureRect = textureRect;
 
             if (start <= 0)
             {
-                this.hitBox.Location = min;
                 this.textureRect.Location = min;
             }
             if (start >= 1)
             {
-                this.hitBox.Location = max;
                 this.textureRect.Location = max;
             }
 
@@ -45,7 +47,7 @@ namespace SE_Platformer_unlocker.Entities
             currentSteps = 0;
             Vector2 temp = distance.ToVector2();
             temp.Normalize();
-            Speed  = temp * speed;
+            this.speed = speed * temp;
         }
 
         public void Draw(SpriteBatch batch)
@@ -53,21 +55,20 @@ namespace SE_Platformer_unlocker.Entities
             batch.Draw(Texture, TextureRect, Color.White);
         }
 
-        public override void Interact(IInteractable interactable)
+        public void Interact(IInteractable interactable)
         {
             
         }
 
-        public override void Update()
+        public void Update()
         {
-            textureRect.Location = hitBox.Location;
+            textureRect.Location = HitBox.Location;
             if (currentSteps > steps)
             {
-                Speed *= -1;
+                speed *= -1;
                 currentSteps = 0;
             }
             currentSteps++;
-            base.Update();
         }
     }
 }

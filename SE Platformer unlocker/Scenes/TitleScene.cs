@@ -1,41 +1,21 @@
 ﻿using Library;
+using Library.Graphics;
 using Library.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SE_Platformer_unlocker.Collections;
 
 namespace SE_Platformer_unlocker.Scenes
 {
     internal class TitleScene : Scene
     {
-        private const string DUNGEON_TEXT = "Dungeon";
-        private const string SLIME_TEXT = "Slime";
-        private const string PRESS_ENTER_TEXT = "Press Enter To Start";
+        private Text titleTop;
+        private Text titleBottom;
+        private Text instructionText;
 
-        // The font to use to render normal text.
-        private SpriteFont _font;
+        private SpriteFont _titleFont;
 
-        // The font used to render the title text.
-        private SpriteFont _font2;
-
-        // The position to draw the dungeon text at.
-        private Vector2 _dungeonTextPos;
-
-        // The origin to set for the dungeon text.
-        private Vector2 _dungeonTextOrigin;
-
-        // The position to draw the slime text at.
-        private Vector2 _slimeTextPos;
-
-        // The origin to set for the slime text.
-        private Vector2 _slimeTextOrigin;
-
-        // The position to draw the press enter text at.
-        private Vector2 _pressEnterPos;
-
-        // The origin to set for the press enter text when drawing it.
-        private Vector2 _pressEnterOrigin;
+        private SpriteFont _instructionFont;
 
         // The texture used for the background pattern.
         private Texture2D _backgroundPattern;
@@ -59,20 +39,20 @@ namespace SE_Platformer_unlocker.Scenes
             // can close the game by pressing the escape key.
             Core.ExitOnEscape = true;
 
-            // Set the position and origin for the Dungeon text.
-            Vector2 size = _font2.MeasureString(DUNGEON_TEXT);
-            _dungeonTextPos = new Vector2(640, 100);
-            _dungeonTextOrigin = size * 0.5f;
+            string title1 = "Move";
+            titleTop = new Text(_titleFont, title1); 
+            Vector2 size = _titleFont.MeasureString(title1);
+            titleTop.Origin = size * 0.5f;
 
-            // Set the position and origin for the Slime text.
-            size = _font2.MeasureString(SLIME_TEXT);
-            _slimeTextPos = new Vector2(757, 207);
-            _slimeTextOrigin = size * 0.5f;
+            string title2 = "Locked";
+            titleBottom = new Text(_titleFont, title2);
+            size = _titleFont.MeasureString(title2);
+            titleBottom.Origin = size * 0.5f;
 
-            // Set the position and origin for the press enter text.
-            size = _font.MeasureString(PRESS_ENTER_TEXT);
-            _pressEnterPos = new Vector2(640, 620);
-            _pressEnterOrigin = size * 0.5f;
+            string instruction = "Press Enter To Start";
+            instructionText = new Text(_instructionFont, instruction);
+            size = _instructionFont.MeasureString(instruction);
+            instructionText.Origin = size * 0.5f;
 
             // Initialize the offset of the background pattern at zero.
             _backgroundOffset = Vector2.Zero;
@@ -85,10 +65,10 @@ namespace SE_Platformer_unlocker.Scenes
         public override void LoadContent()
         {
             // Load the font for the standard text.
-            _font = Core.Content.Load<SpriteFont>("fonts/File");
+            _instructionFont = Core.Content.Load<SpriteFont>("fonts/InstructionFont");
 
             // Load the font for the start instruction
-            _font2 = Core.Content.Load<SpriteFont>("fonts/TitleFont");
+            _titleFont = Core.Content.Load<SpriteFont>("fonts/TitleFont");
 
             // Load the background pattern texture.
             _backgroundPattern = Content.Load<Texture2D>("sprites/background-pattern");
@@ -99,7 +79,7 @@ namespace SE_Platformer_unlocker.Scenes
             // If the user presses enter, switch to the game scene.
             if (Core.Input.Keyboard.WasKeyJustPressed(Keys.Enter))
             {
-                Core.ChangeScene(new GameScene());
+                Core.ChangeScene(new MenuScene());
             }
 
             // Update the offsets for the background pattern wrapping so that it
@@ -130,22 +110,15 @@ namespace SE_Platformer_unlocker.Scenes
             // The color to use for the drop shadow text.
             Color dropShadowColor = Color.Black * 0.5f;
 
-            // Draw the Dungeon text slightly offset from it is original position and
-            // with a transparent color to give it a drop shadow.
-            Core.SpriteBatch.DrawString(_font2, DUNGEON_TEXT, _dungeonTextPos + new Vector2(10, 10), dropShadowColor, 0.0f, _dungeonTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
+            int center = Core.WIDTH / 2;
 
-            // Draw the Dungeon text on top of that at its original position.
-            Core.SpriteBatch.DrawString(_font2, DUNGEON_TEXT, _dungeonTextPos, Color.White, 0.0f, _dungeonTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
+            //Core.SpriteBatch.DrawString(_titleFont, DUNGEON_TEXT, _dungeonTextPos + new Vector2(10, 10), dropShadowColor, 0.0f, _dungeonTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
+            titleTop.Draw(Core.SpriteBatch, new Vector2(center, Core.HEIGHT / 5));
+            titleBottom.Draw(Core.SpriteBatch, new Vector2(center, (int)(1.5f * Core.HEIGHT / 5)));
 
-            // Draw the Slime text slightly offset from it is original position and
-            // with a transparent color to give it a drop shadow.
-            Core.SpriteBatch.DrawString(_font2, SLIME_TEXT, _slimeTextPos + new Vector2(10, 10), dropShadowColor, 0.0f, _slimeTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
+            //Core.SpriteBatch.DrawString(_titleFont, SLIME_TEXT, _slimeTextPos + new Vector2(10, 10), dropShadowColor, 0.0f, _slimeTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
 
-            // Draw the Slime text on top of that at its original position.
-            Core.SpriteBatch.DrawString(_font2, SLIME_TEXT, _slimeTextPos, Color.White, 0.0f, _slimeTextOrigin, 1.0f, SpriteEffects.None, 1.0f);
-
-            // Draw the press enter text.
-            Core.SpriteBatch.DrawString(_font, PRESS_ENTER_TEXT, _pressEnterPos, Color.White, 0.0f, _pressEnterOrigin, 1.0f, SpriteEffects.None, 0.0f);
+            instructionText.Draw(Core.SpriteBatch, new Vector2(center, 2 * Core.HEIGHT / 5));
 
             // Always end the sprite batch when finished.
             Core.SpriteBatch.End();

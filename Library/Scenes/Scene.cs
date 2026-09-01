@@ -26,9 +26,6 @@ namespace Library.Scenes
 
         protected ContentManager Content { get; }
 
-        /// <summary>
-        /// Gets a value that indicates if the scene has been disposed of.
-        /// </summary>
         public bool IsDisposed { get; private set; }
 
 
@@ -37,30 +34,17 @@ namespace Library.Scenes
             LoadContent();
         }
 
-        /// <summary>
-        /// Override to provide logic to load content for the scene.
-        /// </summary>
-        public virtual void LoadContent() { }
+        public abstract void LoadContent();
 
-        /// <summary>
-        /// Unloads scene-specific content.
-        /// </summary>
         public virtual void UnloadContent()
         {
             Content.Unload();
         }
 
-        /// <summary>
-        /// Updates this scene.
-        /// </summary>
-        /// <param name="gameTime">A snapshot of the timing values for the current frame.</param>
         public abstract void Update(GameTime gameTime);
 
-        /// <summary>
-        /// Draws this scene.
-        /// </summary>
-        /// <param name="gameTime">A snapshot of the timing values for the current frame.</param>
         public abstract void Draw(GameTime gameTime);
+
 
         public void Dispose()
         {
@@ -68,13 +52,6 @@ namespace Library.Scenes
             GC.SuppressFinalize(this);
         }
 
-        /// <summary>
-        /// Disposes of this scene.
-        /// </summary>
-        /// <param name="disposing">'
-        /// Indicates whether managed resources should be disposed.  This value is only true when called from the main
-        /// Dispose method.  When called from the finalizer, this will be false.
-        /// </param>
         protected virtual void Dispose(bool disposing)
         {
             if (IsDisposed)

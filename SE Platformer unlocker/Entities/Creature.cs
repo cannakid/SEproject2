@@ -1,11 +1,12 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Library.Graphics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SE_Platformer_unlocker.Base;
 
 
 namespace SE_Platformer_unlocker.Entities
 {
-    internal abstract class Creature : IGameObject, IDynamic, IInteractable, IVisible
+    internal abstract class Creature : Sprite, IGameObject,  IInteractable
     {
         public Rectangle HitBox { get => hitBox; }
         protected Rectangle hitBox;

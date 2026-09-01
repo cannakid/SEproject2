@@ -1,5 +1,6 @@
 ﻿
 
+using Library.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SE_Platformer_unlocker.Base;
@@ -7,7 +8,7 @@ using SE_Platformer_unlocker.Entities;
 
 namespace SE_Platformer_unlocker.Blocks
 {
-    internal class Block : IGameObject, IVisible, IInteractable
+    internal class Block : Sprite, IGameObject,  IInteractable
     {
         public Block(Texture2D texture, Point pos, Point size)
         {

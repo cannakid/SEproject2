@@ -1,26 +1,47 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Library;
+using Library.Graphics;
+using Library.Input;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
+using SE_Platformer_unlocker.Base;
+using System;
 
 namespace SE_Platformer_unlocker.UI
 {
-    internal class UIButton : IUiElement
+    public class UIButton : IUiElement, IDynamic
     {
-        private string text;
-        private Rectangle button;
-        private SpriteFont font;
-
-        public void Draw(SpriteBatch batch)
+        public UIButton(Text text, Sprite sprite, Rectangle rect, Action action)
         {
-            batch.DrawString(font, text, button.Location.ToVector2(), Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1);
+            this.text = text;
+            this.image = sprite;
+            image.LayerDepth = text.LayerDepth + 1;
+            this.button = rect;
+            this.action = action;
+        }
+
+
+        private Text text;
+        private Sprite image;
+        private Rectangle button;
+
+        private Action action;
+
+        private Vector2 position => button.Location.ToVector2();
+
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            text.Draw(spriteBatch, position);
+            image.Draw(spriteBatch, position);
         }
 
         public void Update()
         {
-            MouseState state = Mouse.GetState();
-            if (state.LeftButton == ButtonState.Pressed)
+            if (Core.Input.Mouse.WasButtonJustPressed(MouseButton.Left))
             {
-
+                if (button.Contains(Core.Input.Mouse.Position))
+                {
+                    action.Invoke();
+                }
             }
         }
     }

@@ -43,19 +43,19 @@
 /processorParam:TextureFormat=Color
 /build:Brown.png
 
-#begin Fonts/File.spritefont
+#begin fonts/InstructionFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:Fonts/File.spritefont
+/build:fonts/InstructionFont.spritefont
 
-#begin Fonts/TitleFont.spritefont
+#begin fonts/TitleFont.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:Fonts/TitleFont.spritefont
+/build:fonts/TitleFont.spritefont
 
 #begin herochar_spritesheet(new).png
 /importer:TextureImporter

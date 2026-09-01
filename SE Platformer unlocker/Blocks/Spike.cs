@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Library.Graphics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using SE_Platformer_unlocker.Base;
 using SE_Platformer_unlocker.Entities;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace SE_Platformer_unlocker.Blocks
 {
-    internal class Spike : IGameObject, IVisible, IInteractable
+    internal class Spike : Sprite, IGameObject, IInteractable
     {
         public Spike(Texture2D texture, Point pos, Point size)
         {

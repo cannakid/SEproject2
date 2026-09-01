@@ -7,7 +7,6 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace SE_Platformer_unlocker.Scenes
 {
@@ -117,13 +116,15 @@ namespace SE_Platformer_unlocker.Scenes
                 Core.Audio.PlaySoundEffect(_collectSoundEffect);
                 _slimePosition.Y = _roomBounds.Bottom - _slime.Height;
             }
+
+            if (Core.Input.Keyboard.WasKeyJustPressed(Keys.Escape))
+            {
+                Core.ChangeScene(new TitleScene());
+            }
         }
 
         private void CheckKeyboardInput()
         {
-            // Get the state of keyboard input
-            KeyboardState keyboardState = Keyboard.GetState();
-
             // If the space key is held down, the movement speed increases by 1.5
             float speed = MOVEMENT_SPEED;
             if (Core.Input.Keyboard.IsKeyDown(Keys.LeftShift))
