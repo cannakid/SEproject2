@@ -46,15 +46,15 @@ namespace SE_Platformer_unlocker.Scenes
 
             Core.ExitOnEscape = true;
 
-            UIText move = Game1.UIFactory.CreateText("Move", _titleFont, 1280, 300);
+            UIText move = Game1.UIFactory.CreateText("Move", _titleFont, 960, 300);
             Add(move);
             Add(Game1.UIFactory.CreateShadow(move));
 
-            UIText locked = Game1.UIFactory.CreateText("Locked", _titleFont, 1280, 450);
+            UIText locked = Game1.UIFactory.CreateText("Locked", _titleFont, 960, 450);
             Add(locked);
             Add(Game1.UIFactory.CreateShadow(locked));
 
-            instructionText = Game1.UIFactory.CreateText("Press Enter To Start", _normalFont, 1280, 600);
+            instructionText = Game1.UIFactory.CreateText("Press Enter To Start", _normalFont, 960, 600);
             Add(instructionText);
 
             _background = new Sprite(new TextureRegion(_backgroundTexture, 0, 0, 480, 272));
@@ -63,15 +63,15 @@ namespace SE_Platformer_unlocker.Scenes
 
             menuItems = new List<IUiElement>();
 
-            UIButton start = Game1.UIFactory.CreateButton("Start", _normalFont, buttonSprite, 1280, 600, 400, 200, () => { Core.ChangeScene(new Level1()); });
+            UIButton start = Game1.UIFactory.CreateButton("Start", _normalFont, buttonSprite, 960, 600, 400, 200, () => { Core.ChangeScene(new Level1()); });
             Add(start);
             menuItems.Add(start);
 
-            UIButton options = Game1.UIFactory.CreateButton("Options", _normalFont, buttonSprite, 1280, 800, 400, 200, () => { Core.ChangeScene(new OptionsScene()); });
+            UIButton options = Game1.UIFactory.CreateButton("Options", _normalFont, buttonSprite, 960, 800, 400, 200, () => { Core.ChangeScene(new OptionsScene()); });
             Add(options);
             menuItems.Add(options);
 
-            UIButton quit = Game1.UIFactory.CreateButton("Quit", _normalFont, buttonSprite, 1280, 1000, 400, 200, () => { Core.Instance.Quit(); });
+            UIButton quit = Game1.UIFactory.CreateButton("Quit", _normalFont, buttonSprite, 960, 1000, 400, 200, () => { Core.Instance.Quit(); });
             Add(quit);
             menuItems.Add(quit);
             foreach (IUiElement ui in menuItems)

@@ -95,12 +95,12 @@ namespace SE_Platformer_unlocker.Entities
 
             if (hitBox.X < 0)
             {
-                hitBox.X = 0;
+                NextPos.X = 0;
                 speed.X = 0;
             }
             else if (hitBox.X > Core.WIDTH - hitBox.Width)
             {
-                hitBox.X = Core.WIDTH - hitBox.Width;
+                NextPos.X = Core.WIDTH - hitBox.Width - 5;
                 speed.X = 0;
             }
         }

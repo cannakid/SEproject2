@@ -46,22 +46,22 @@ namespace SE_Platformer_unlocker.Scenes
         {
             base.Initialize();
 
-            UIText game = Game1.UIFactory.CreateText("Game", _titleFont, 1280, 150);
+            UIText game = Game1.UIFactory.CreateText("Game", _titleFont, 960, 150);
             Add(game);
             Add(Game1.UIFactory.CreateShadow(game));
 
-            UIText over = Game1.UIFactory.CreateText("Over", _titleFont, 1280, 300);
+            UIText over = Game1.UIFactory.CreateText("Over", _titleFont, 960, 300);
             Add(over);
             Add(Game1.UIFactory.CreateShadow(over));
 
             buttonSprite.CenterOrigin();
             buttonSprite.Scale = new Vector2(6f, 4f);
 
-            Add(Game1.UIFactory.CreateButton("Retry", _normalFont, buttonSprite, 1280, 500, 600, 200, () => { Core.ChangeScene(scene); }));
+            Add(Game1.UIFactory.CreateButton("Retry", _normalFont, buttonSprite, 960, 500, 600, 200, () => { Core.ChangeScene(scene); }));
 
-            Add(Game1.UIFactory.CreateButton("Menu", _normalFont, buttonSprite, 1280, 700, 600, 200, () => { Core.ChangeScene(new TitleScene()); }));
+            Add(Game1.UIFactory.CreateButton("Menu", _normalFont, buttonSprite, 960, 700, 600, 200, () => { Core.ChangeScene(new TitleScene()); }));
 
-            Add(Game1.UIFactory.CreateButton("Quit", _normalFont, buttonSprite, 1280, 900, 600, 200, () => { Core.Instance.Quit(); }));
+            Add(Game1.UIFactory.CreateButton("Quit", _normalFont, buttonSprite, 960, 900, 600, 200, () => { Core.Instance.Quit(); }));
         }
         
         public override void LoadContent()

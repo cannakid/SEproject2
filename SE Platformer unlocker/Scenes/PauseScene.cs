@@ -34,18 +34,18 @@ namespace SE_Platformer_unlocker.Scenes
         {
             base.Initialize();
 
-            UIText paused = Game1.UIFactory.CreateText("Paused", _titleFont, 1280, 200);
+            UIText paused = Game1.UIFactory.CreateText("Paused", _titleFont, 960, 200);
             Add(paused);
             Add(Game1.UIFactory.CreateShadow(paused));
             
             buttonSprite.CenterOrigin();
             buttonSprite.Scale = new Vector2(6f, 4f);
 
-            Add(Game1.UIFactory.CreateButton("Continue", _normalFont, buttonSprite, 1280, 400, 600, 200, () => { level.isPauseOpen = false; }));
+            Add(Game1.UIFactory.CreateButton("Continue", _normalFont, buttonSprite, 960, 400, 600, 200, () => { level.isPauseOpen = false; }));
 
-            Add(Game1.UIFactory.CreateButton("Options", _normalFont, buttonSprite, 1280, 600, 600, 200, () => { Core.ChangeScene(new OptionsScene()); }));
+            Add(Game1.UIFactory.CreateButton("Options", _normalFont, buttonSprite, 960, 600, 600, 200, () => { Core.ChangeScene(new OptionsScene()); }));
 
-            Add(Game1.UIFactory.CreateButton("Back to Menu", _normalFont, buttonSprite, 1280, 800, 600, 200, () => { Core.ChangeScene(new TitleScene()); }));
+            Add(Game1.UIFactory.CreateButton("Back to Menu", _normalFont, buttonSprite, 960, 800, 600, 200, () => { Core.ChangeScene(new TitleScene()); }));
 
         }
 

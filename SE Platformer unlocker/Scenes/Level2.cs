@@ -54,16 +54,16 @@ namespace SE_Platformer_unlocker.Scenes
 
             Rectangle screenBounds = Core.GraphicsDevice.PresentationParameters.Bounds;
 
-            _champ = new Champion(_champSprites, new Point(100, 1000), new Point(80, 80), this, _jumpSoundEffect, _hurtSoundEffect, 3);
+            _champ = new Champion(_champSprites, new Point(100, 880), new Point(60, 60), this, _jumpSoundEffect, _hurtSoundEffect, 3);
             collisionHandler.Add(_champ);
 
-            _slime_1 = new Slime(_slimeSprite, new Point(500, 1200), new Point(80, 80), this, 1);
+            _slime_1 = new Slime(_slimeSprite, new Point(500, 880), new Point(60, 60), this, 1);
             collisionHandler.Add(_slime_1);
 
-            _slime_2 = new DangerSlime(_dangerSlimeSprite, new Point(500, 840), new Point(80, 80), this, 1, _champ);
+            _slime_2 = new DangerSlime(_dangerSlimeSprite, new Point(500, 600), new Point(60, 60), this, 1, _champ);
             collisionHandler.Add(_slime_2);
 
-            _coin = new Coin(_coinSprite, new Rectangle(2000, 360, 80, 80), this);
+            _coin = new Coin(_coinSprite, new Rectangle(1700, 240, 60, 60), this);
             collisionHandler.Add(_coin);
 
             pauseButton = new UIIcon(new Sprite(new TextureRegion(pauseTexture, 0, 0, 600, 600)), new Rectangle(Core.WIDTH - 80, 80, 80, 80), () => { isPauseOpen = true; });
@@ -109,7 +109,7 @@ namespace SE_Platformer_unlocker.Scenes
             // Create the tilemap from the XML configuration file.
             TileMap _tileMap = TileMap.FromFile(Content, "sprites/tilemap2-definition.xml");
             _blockMap = new BlockMap(_tileMap);
-            _blockMap.Scale = new Vector2(5f, 5f);
+            _blockMap.Scale = new Vector2(4f, 4f);
 
             pauseTexture = Content.Load<Texture2D>("sprites/options_icon");
 

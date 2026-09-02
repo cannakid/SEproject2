@@ -4,25 +4,25 @@
   <Platform>DesktopGL</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/audio/coin.wav</File>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/audio/hurt.wav</File>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/audio/jump.wav</File>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/audio/power_up.wav</File>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/audio/time_for_adventure.mp3</File>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/fonts/InstructionFont.spritefont</File>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/fonts/standardFont.spritefont</File>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/fonts/TitleFont.spritefont</File>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/Background.png</File>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/coin.png</File>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/hearts.png</File>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/hud.png</File>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/Idle-Sheet.png</File>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/Jump-All-Sheet.png</File>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/options_icon.png</File>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/Run-Sheet.png</File>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/slime_green.png</File>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/slime_purple.png</File>
-    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/world_tileset.png</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/audio/coin.wav</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/audio/hurt.wav</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/audio/jump.wav</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/audio/power_up.wav</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/audio/time_for_adventure.mp3</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/fonts/InstructionFont.spritefont</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/fonts/standardFont.spritefont</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/fonts/TitleFont.spritefont</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/sprites/Background.png</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/sprites/coin.png</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/sprites/hearts.png</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/sprites/hud.png</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/sprites/Idle-Sheet.png</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/sprites/Jump-All-Sheet.png</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/sprites/options_icon.png</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/sprites/Run-Sheet.png</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/sprites/slime_green.png</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/sprites/slime_purple.png</File>
+    <File>C:/Users/jonas/Source/Repos/SEproject2/SE Platformer unlocker/Content/sprites/world_tileset.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />
