@@ -1,28 +1,207 @@
-﻿using Library.Scenes;
+﻿using Library;
+using Library.Graphics;
 using Microsoft.Xna.Framework;
-using System;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using SE_Platformer_unlocker.Blocks;
+using SE_Platformer_unlocker.Entities;
+using SE_Platformer_unlocker.UI;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SE_Platformer_unlocker.Scenes
 {
     public class Level2 : LevelScene
     {
-        public override void Draw(GameTime gameTime)
+        private Sprite _champSprite;
+        private Champion _champ;
+
+        private Sprite _slimeSprite;
+        private Creature _slime_1;
+
+        private Sprite _coinSprite;
+        private Entity _coin;
+
+        // Defines the tilemap to draw.
+        private BlockMap _blockMap;
+
+        // The sound effect to play when the bat bounces off the edge of the screen.
+        private SoundEffect _hurtSoundEffect;
+
+        // The sound effect to play when the slime eats a bat.
+        private SoundEffect _jumpSoundEffect;
+
+        private TextureAtlas idle;
+
+        private UIIcon pauseButton;
+        private Texture2D pauseTexture;
+
+        private Sprite _heartSprite;
+        private Sprite _emptyHeartSprite;
+        private List<UIIcon> _hearts;
+
+        private int currentHeartDisplay;
+
+        public override void Initialize()
         {
-            throw new NotImplementedException();
+            base.Initialize();
+
+            Core.ExitOnEscape = false;
+
+
+            Rectangle screenBounds = Core.GraphicsDevice.PresentationParameters.Bounds;
+
+            _champ = new Champion(_champSprite, new Point(100, 1000), new Point(80, 80), this, _jumpSoundEffect, _hurtSoundEffect, 3);
+            Interactables.Add(_champ);
+
+            _slime_1 = new Slime(_slimeSprite, new Point(500, 1200), new Point(80, 80), this, 1);
+            Interactables.Add(_slime_1);
+
+            _coin = new Coin(_coinSprite, new Rectangle(2000, 1200, 80, 80), this);
+            Interactables.Add(_coin);
+
+            pauseButton = new UIIcon(new Sprite(new TextureRegion(pauseTexture, 0, 0, 600, 600)), new Rectangle(Core.WIDTH - 80, 80, 80, 80), () => { isPauseOpen = true; });
+            pauseButton.CenterIcon();
+
+
+            List<Block> blocks = _blockMap.CreateBlocks();
+            foreach (Block b in blocks)
+            {
+                Interactables.Add(b);
+            }
+            _hearts = new List<UIIcon>();
+            for (int i = 0; i < 3; i++)
+            {
+                _hearts.Add(new UIIcon(_heartSprite, new Rectangle(40 + 80 * i, 40, 80, 80), () => { }));
+            }
+            currentHeartDisplay = _champ.Health;
         }
 
         public override void LoadContent()
         {
-            throw new NotImplementedException();
+            idle = TextureAtlas.FromFile(Content, "sprites/idle-definition.xml");
+
+            _champSprite = idle.CreateAnimatedSprite("idle-animation");
+
+            TextureAtlas slimeAtlas = TextureAtlas.FromFile(Content, "sprites/slime-definition.xml");
+
+            _slimeSprite = slimeAtlas.CreateAnimatedSprite("slime-animation");
+
+            TextureAtlas coinAtlas = TextureAtlas.FromFile(Content, "sprites/coin-definition.xml");
+
+            _coinSprite = coinAtlas.CreateAnimatedSprite("coin-animation");
+
+            TextureAtlas heartAtlas = TextureAtlas.FromFile(Content, "sprites/hearts-definition.xml");
+
+            _heartSprite = heartAtlas.CreateSprite("heart-full");
+            _emptyHeartSprite = heartAtlas.CreateSprite("heart-empty");
+
+            // Create the tilemap from the XML configuration file.
+            TileMap _tileMap = TileMap.FromFile(Content, "sprites/tilemap-definition.xml");
+            _blockMap = new BlockMap(_tileMap);
+            _blockMap.Scale = new Vector2(5f, 5f);
+
+            pauseTexture = Content.Load<Texture2D>("sprites/options_icon");
+
+            _jumpSoundEffect = Content.Load<SoundEffect>("audio/jump");
+
+            _hurtSoundEffect = Content.Load<SoundEffect>("audio/hurt");
+
+
         }
 
         public override void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            if (isPauseOpen)
+            {
+                pause.Update(gameTime);
+            }
+            else
+            {
+                _champ.Update(gameTime);
+
+                _slime_1.Update(gameTime);
+
+                _coin.Update(gameTime);
+
+                // Check for keyboard input and handle it.
+                CheckKeyboardInput();
+
+                if (Core.Input.Keyboard.WasKeyJustPressed(Keys.Escape))
+                {
+                    isPauseOpen = true;
+                }
+                pauseButton.Update(gameTime);
+
+                if (_champ.Health < currentHeartDisplay)
+                {
+                    _hearts[currentHeartDisplay - 1].ChangeIcon(_emptyHeartSprite);
+                    currentHeartDisplay--;
+                }
+            }
+        }
+
+        private void CheckKeyboardInput()
+        {
+            if (Core.Input.Keyboard.WasKeyJustPressed(Keys.M))
+            {
+                Core.Audio.ToggleMute();
+            }
+
+            // If the + button is pressed, increase the volume.
+            if (Core.Input.Keyboard.WasKeyJustPressed(Keys.OemPlus))
+            {
+                Core.Audio.SongVolume += 0.1f;
+                Core.Audio.SoundEffectVolume += 0.1f;
+            }
+
+            // If the - button was pressed, decrease the volume.
+            if (Core.Input.Keyboard.WasKeyJustPressed(Keys.OemMinus))
+            {
+                Core.Audio.SongVolume -= 0.1f;
+                Core.Audio.SoundEffectVolume -= 0.1f;
+            }
+        }
+
+        public override void Draw(GameTime gameTime)
+        {
+            if (isPauseOpen)
+            {
+                Core.GraphicsDevice.Clear(Color.DarkBlue);
+            }
+            else
+            {
+                Core.GraphicsDevice.Clear(Color.CornflowerBlue);
+            }
+
+            Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
+
+            _blockMap.Draw(Core.SpriteBatch);
+
+            _champ.Draw(gameTime);
+
+            _slime_1.Draw(gameTime);
+
+            _coin.Draw(gameTime);
+
+            pauseButton.Draw(Core.SpriteBatch);
+
+            foreach (UIIcon heart in _hearts)
+            {
+                heart.Draw(Core.SpriteBatch);
+            }
+
+            Core.SpriteBatch.End();
+
+            if (isPauseOpen)
+            {
+                pause.Draw(gameTime);
+            }
+        }
+
+        public void CloseOptions()
+        {
+            isPauseOpen = false;
         }
     }
 }

@@ -13,8 +13,15 @@ using System.Threading.Tasks;
 
 namespace SE_Platformer_unlocker.Scenes
 {
-    internal class VictoryScene : Scene
+    public class VictoryScene : Scene
     {
+        public VictoryScene(Scene nextLevel = null)
+        {
+            this.nextLevel = nextLevel;
+        }
+
+        private Scene nextLevel;
+
         private SpriteFont _titleFont;
 
         private SpriteFont _normalFont;
@@ -56,7 +63,7 @@ namespace SE_Platformer_unlocker.Scenes
             buttonSprite.CenterOrigin();
             buttonSprite.Scale = new Vector2(4f, 4f);
 
-            next = new UIButton(nextText, buttonSprite, new Rectangle(Core.WIDTH / 2, (int)(2 * Core.HEIGHT / 5), (int)buttonSprite.Width, (int)buttonSprite.Height), () => { Core.ChangeScene(new Level2()); });
+            next = new UIButton(nextText, buttonSprite, new Rectangle(Core.WIDTH / 2, (int)(2 * Core.HEIGHT / 5), (int)buttonSprite.Width, (int)buttonSprite.Height), () => { Core.ChangeScene(nextLevel); });
             next.CenterButton();
 
             menu = new UIButton(menuText, buttonSprite, new Rectangle(Core.WIDTH / 2, (int)(2.5f * Core.HEIGHT / 5), (int)buttonSprite.Width, (int)buttonSprite.Height), () => { Core.ChangeScene(new TitleScene()); });
@@ -98,6 +105,10 @@ namespace SE_Platformer_unlocker.Scenes
             titleTop.Draw(Core.SpriteBatch, new Vector2(center, Core.HEIGHT / 5));
             titleTopShadow.Draw(Core.SpriteBatch, new Vector2(center, Core.HEIGHT / 5) + new Vector2(10, 10));
 
+            if (nextLevel != null)
+            {
+                next.Draw(Core.SpriteBatch);
+            }
             menu.Draw(Core.SpriteBatch);
             quit.Draw(Core.SpriteBatch);
 
@@ -108,6 +119,10 @@ namespace SE_Platformer_unlocker.Scenes
 
         public override void Update(GameTime gameTime)
         {
+            if (nextLevel != null)
+            {
+                next.Update(gameTime);
+            }
             menu.Update(gameTime);
             quit.Update(gameTime);
         }

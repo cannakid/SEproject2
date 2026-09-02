@@ -22,16 +22,18 @@ namespace SE_Platformer_unlocker.Entities
         private bool remainGrounded = false;
 
         private SoundEffect jumpSound;
+        private SoundEffect hurtSound;
 
         public Rectangle PrevPos;
 
         private TimeSpan invincibility = TimeSpan.Zero;
         private const int invincibilityDuration = 3;
 
-        public Champion(Sprite sprite, Point pos, Point size, LevelScene scene, SoundEffect jump, int health) : base(sprite, pos, size, scene, health)
+        public Champion(Sprite sprite, Point pos, Point size, LevelScene scene, SoundEffect jump, SoundEffect hurt, int health) : base(sprite, pos, size, scene, health)
         {
             PrevPos = hitBox;
             jumpSound = jump;
+            hurtSound = hurt;
         }
 
         public override void Update(GameTime gameTime)
@@ -65,7 +67,7 @@ namespace SE_Platformer_unlocker.Entities
             if (isGrounded && Keyboard.GetState().IsKeyDown(Keys.W))
             {
                 Core.Audio.PlaySoundEffect(jumpSound);
-                speed.Y -= 12;
+                speed.Y -= 15;
                 isGrounded = false;
             }
             hitBox.Offset(speed);
@@ -142,6 +144,7 @@ namespace SE_Platformer_unlocker.Entities
             {
                 if (invincibility == TimeSpan.Zero)
                 {
+                    Core.Audio.PlaySoundEffect(hurtSound);
                     Health -= 1;
                     invincibility = invincibility.Add(TimeSpan.FromSeconds(3));
                 }
@@ -152,7 +155,15 @@ namespace SE_Platformer_unlocker.Entities
             }
             else if (type == InteractionType.VICTORY)
             {
-                Core.ChangeScene(new VictoryScene());
+                if (scene is Level1)
+                {
+                    Core.ChangeScene(new VictoryScene(new Level2()));
+                }
+                else
+                {
+                    Core.ChangeScene(new VictoryScene());
+                }
+                
             }
         }
     }

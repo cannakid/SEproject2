@@ -19,6 +19,7 @@ namespace SE_Platformer_unlocker.Scenes
     {
         private Sprite _champSprite;
         private Champion _champ;
+        private const int champHealth = 3;
 
         private Sprite _slimeSprite;
         private Creature _slime;
@@ -55,10 +56,10 @@ namespace SE_Platformer_unlocker.Scenes
 
             Rectangle screenBounds = Core.GraphicsDevice.PresentationParameters.Bounds;
 
-            _champ = new Champion(_champSprite, new Point(100, 1000), new Point(80, 80), this, _jumpSoundEffect, 3);
+            _champ = new Champion(_champSprite, new Point(100, 1000), new Point(80, 80), this, _jumpSoundEffect, _hurtSoundEffect, champHealth);
             Interactables.Add(_champ);
 
-            _slime = new Slime(_slimeSprite, new Point(500, 1280), new Point(80, 80), this, 1);
+            _slime = new Slime(_slimeSprite, new Point(500, 1200), new Point(80, 80), this, 1);
             Interactables.Add(_slime);
 
             _coin = new Coin(_coinSprite, new Rectangle(2000, 1200, 80, 80), this);
@@ -74,7 +75,7 @@ namespace SE_Platformer_unlocker.Scenes
                 Interactables.Add(b);
             }
             _hearts = new List<UIIcon>();
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < champHealth; i++)
             {
                 _hearts.Add(new UIIcon(_heartSprite, new Rectangle(40 + 80* i, 40, 80, 80), () => { }));
             }
@@ -108,6 +109,7 @@ namespace SE_Platformer_unlocker.Scenes
             pauseTexture = Content.Load<Texture2D>("sprites/options_icon");
 
             _jumpSoundEffect = Content.Load<SoundEffect>("audio/jump");
+            _hurtSoundEffect = Content.Load<SoundEffect>("audio/hurt");
 
 
         }

@@ -28,7 +28,7 @@ namespace SE_Platformer_unlocker.Base
             {
                 return InteractionDirection.RIGHT;
             }
-            return InteractionDirection.NONE;
+            return InteractionDirection.WITHIN;
         }
     }
 }
