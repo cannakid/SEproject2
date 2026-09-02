@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SE_Platformer_unlocker.Base
+namespace SE_Platformer_unlocker.Collision
 {
     public enum InteractionDirection
     {

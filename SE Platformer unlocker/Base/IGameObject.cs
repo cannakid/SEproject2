@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace SE_Platformer_unlocker.Base
 {
-    public enum InteractionType
+    public interface IGameObject
     {
-        BLOCK,
-        HIT,
-        PUSH,
-        VICTORY,
-        NONE
+        public bool Active { get; set; }
     }
 }

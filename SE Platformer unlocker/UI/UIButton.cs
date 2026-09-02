@@ -12,6 +12,7 @@ namespace SE_Platformer_unlocker.UI
     {
         public UIButton(Text text, Sprite sprite, Rectangle rect, Action action)
         {
+            Active = true;
             this.text = text;
             this.image = sprite;
             image.LayerDepth = text.LayerDepth + 1;
@@ -28,7 +29,8 @@ namespace SE_Platformer_unlocker.UI
 
         private Action action;
 
-        
+        public bool Active { get; set; }
+
         public void CenterButton()
         {
             text.CenterText();

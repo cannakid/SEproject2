@@ -9,10 +9,12 @@ using System.Threading.Tasks;
 
 namespace SE_Platformer_unlocker.Base
 {
-    public class Drawable
+    public abstract class Drawable : IGameObject
     {
         private Sprite sprite;
         private Vector2 position;
+
+        public bool Active { get; set; }
 
         public void Draw()
         {

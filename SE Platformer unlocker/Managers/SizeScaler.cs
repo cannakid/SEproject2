@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SE_Platformer_unlocker.Managers
 {
-    public class SizeManager
+    public class SizeScaler
     {
         private const int DEV_WIDTH = 2560;
         private const int DEV_HEIGHT = 1440;

@@ -2,7 +2,7 @@
 
 using Microsoft.Xna.Framework;
 
-namespace SE_Platformer_unlocker.Base
+namespace SE_Platformer_unlocker.Collision
 {
     public static class Collision
     {

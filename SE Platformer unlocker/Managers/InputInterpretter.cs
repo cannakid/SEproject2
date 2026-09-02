@@ -15,29 +15,32 @@ namespace SE_Platformer_unlocker.Managers
         {
             this.manager = manager;
 
+            keyBinds = new Dictionary<Actions, Keys>();
+            buttonBinds = new Dictionary<Actions, Buttons>();
+
             keyBinds.Add(Actions.Movement1, Keys.A);
-            keyBinds.Add(Actions.Movement1, Keys.D);
+            keyBinds.Add(Actions.Movement2, Keys.D);
 
             buttonBinds.Add(Actions.Movement1, Buttons.LeftThumbstickLeft);
-            buttonBinds.Add(Actions.Movement1, Buttons.LeftThumbstickRight);
+            buttonBinds.Add(Actions.Movement2, Buttons.LeftThumbstickRight);
 
             keyBinds.Add(Actions.Gravity1, Keys.W);
             keyBinds.Add(Actions.Gravity2, Keys.S);
 
-            buttonBinds.Add(Actions.Movement1, Buttons.A);
-            buttonBinds.Add(Actions.Movement1, Buttons.B);
+            buttonBinds.Add(Actions.Gravity1, Buttons.A);
+            buttonBinds.Add(Actions.Gravity2, Buttons.B);
 
             keyBinds.Add(Actions.Attack1, Keys.E);
             keyBinds.Add(Actions.Attack2, Keys.R);
 
-            buttonBinds.Add(Actions.Movement1, Buttons.X);
-            buttonBinds.Add(Actions.Movement1, Buttons.Y);
+            buttonBinds.Add(Actions.Attack1, Buttons.X);
+            buttonBinds.Add(Actions.Attack2, Buttons.Y);
 
-            keyBinds.Add(Actions.Movement1, Keys.LeftShift);
-            keyBinds.Add(Actions.Movement1, Keys.LeftControl);
+            keyBinds.Add(Actions.ExtraMovement1, Keys.LeftShift);
+            keyBinds.Add(Actions.ExtraMovement2, Keys.LeftControl);
 
-            buttonBinds.Add(Actions.Movement1, Buttons.LeftTrigger);
-            buttonBinds.Add(Actions.Movement1, Buttons.RightTrigger);
+            buttonBinds.Add(Actions.ExtraMovement1, Buttons.LeftTrigger);
+            buttonBinds.Add(Actions.ExtraMovement2, Buttons.RightTrigger);
 
             FindGamePad();
         }

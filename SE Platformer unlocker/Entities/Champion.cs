@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using SE_Platformer_unlocker.Base;
+using SE_Platformer_unlocker.Collision;
 using SE_Platformer_unlocker.Scenes;
 using System;
 using System.Collections.Generic;

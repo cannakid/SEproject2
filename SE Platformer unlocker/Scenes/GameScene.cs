@@ -3,6 +3,7 @@ using Library.Graphics;
 using Library.Scenes;
 using Microsoft.Xna.Framework;
 using SE_Platformer_unlocker.Base;
+using SE_Platformer_unlocker.Collision;
 using System.Collections.Generic;
 
 namespace SE_Platformer_unlocker.Scenes

@@ -17,6 +17,7 @@ namespace SE_Platformer_unlocker.UI
     {
         public UIIcon(Sprite sprite, Rectangle rect, Action action)
         {
+            Active = true;
             this.image = sprite;
             this.position = rect.Location.ToVector2();
             this.button = rect;
@@ -30,6 +31,8 @@ namespace SE_Platformer_unlocker.UI
         private Vector2 position;
 
         private Action action;
+
+        public bool Active { get; set; }
 
         public void CenterIcon()
         {

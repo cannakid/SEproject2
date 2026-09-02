@@ -1,7 +1,7 @@
 ﻿using Library.Graphics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using SE_Platformer_unlocker.Base;
+using SE_Platformer_unlocker.Collision;
 using SE_Platformer_unlocker.Entities;
 using System;
 using System.Collections.Generic;

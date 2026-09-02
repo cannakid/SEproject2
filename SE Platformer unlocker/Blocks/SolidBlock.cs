@@ -1,4 +1,4 @@
-﻿using SE_Platformer_unlocker.Base;
+﻿using SE_Platformer_unlocker.Collision;
 using System;
 using System.Collections.Generic;
 using System.Linq;
