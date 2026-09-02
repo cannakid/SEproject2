@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+	<Texture>sprites/Idle-Sheet</Texture>
+	<Regions>
+		<Region name="jump-1" x="0" y="0" width="64" height="64" />
+		<Region name="jump-2" x="64" y="0" width="64" height="64" />
+		<Region name="jump-3" x="128" y="0" width="64" height="64" />
+		<Region name="jump-4" x="192" y="0" width="64" height="64" />
+		<Region name="air-1" x="256" y="0" width="64" height="64" />
+		<Region name="air-2" x="320" y="0" width="64" height="64" />
+		<Region name="air-3" x="384" y="0" width="64" height="64" />
+		<Region name="air-4" x="448" y="0" width="64" height="64" />
+		<Region name="air-5" x="512" y="0" width="64" height="64" />
+		<Region name="air-6" x="576" y="0" width="64" height="64" />
+		<Region name="air-7" x="640" y="0" width="64" height="64" />
+		<Region name="air-8" x="704" y="0" width="64" height="64" />
+		<Region name="land-1" x="768" y="0" width="64" height="64" />
+		<Region name="land-2" x="832" y="0" width="64" height="64" />
+		<Region name="land-3" x="896" y="0" width="64" height="64" />
+	</Regions>
+	<Animations>
+		<Animation name="jump-animation" delay="200">
+			<Frame region="jump-1" />
+			<Frame region="jump-2" />
+			<Frame region="jump-3" />
+			<Frame region="jump-4" />
+		</Animation>
+		<Animation name="air-animation" delay="200">
+			<Frame region="air-1" />
+			<Frame region="air-2" />
+			<Frame region="air-3" />
+			<Frame region="air-4" />
+			<Frame region="air-5" />
+			<Frame region="air-6" />
+			<Frame region="air-7" />
+			<Frame region="air-8" />
+		</Animation>
+		<Animation name="land-animation" delay="200">
+			<Frame region="land-1" />
+			<Frame region="land-2" />
+			<Frame region="land-3" />
+		</Animation>
+	</Animations>
+</TextureAtlas>

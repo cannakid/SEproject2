@@ -139,6 +139,21 @@
 /processorParam:TextureFormat=Color
 /build:sprites/Idle-Sheet.png
 
+#begin sprites/Jump-All-Sheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:sprites/Jump-All-Sheet.png
+
+#begin sprites/jump-definition.xml
+/copy:sprites/jump-definition.xml
+
 #begin sprites/options_icon.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -150,6 +165,21 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:sprites/options_icon.png
+
+#begin sprites/run-definition.xml
+/copy:sprites/run-definition.xml
+
+#begin sprites/Run-Sheet.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:sprites/Run-Sheet.png
 
 #begin sprites/slime_green.png
 /importer:TextureImporter
@@ -168,6 +198,9 @@
 
 #begin sprites/tilemap-definition.xml
 /copy:sprites/tilemap-definition.xml
+
+#begin sprites/tilemap2-definition.xml
+/copy:sprites/tilemap2-definition.xml
 
 #begin sprites/world_tileset.png
 /importer:TextureImporter

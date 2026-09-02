@@ -52,13 +52,13 @@ namespace SE_Platformer_unlocker.Scenes
             Rectangle screenBounds = Core.GraphicsDevice.PresentationParameters.Bounds;
 
             _champ = new Champion(_champSprite, new Point(100, 1000), new Point(80, 80), this, _jumpSoundEffect, _hurtSoundEffect, 3);
-            Interactables.Add(_champ);
+            collisionHandler.Add(_champ);
 
             _slime_1 = new Slime(_slimeSprite, new Point(500, 1200), new Point(80, 80), this, 1);
-            Interactables.Add(_slime_1);
+            collisionHandler.Add(_slime_1);
 
             _coin = new Coin(_coinSprite, new Rectangle(2000, 1200, 80, 80), this);
-            Interactables.Add(_coin);
+            collisionHandler.Add(_coin);
 
             pauseButton = new UIIcon(new Sprite(new TextureRegion(pauseTexture, 0, 0, 600, 600)), new Rectangle(Core.WIDTH - 80, 80, 80, 80), () => { isPauseOpen = true; });
             pauseButton.CenterIcon();
@@ -67,7 +67,7 @@ namespace SE_Platformer_unlocker.Scenes
             List<Block> blocks = _blockMap.CreateBlocks();
             foreach (Block b in blocks)
             {
-                Interactables.Add(b);
+                collisionHandler.Add(b);
             }
             _hearts = new List<UIIcon>();
             for (int i = 0; i < 3; i++)
@@ -97,7 +97,7 @@ namespace SE_Platformer_unlocker.Scenes
             _emptyHeartSprite = heartAtlas.CreateSprite("heart-empty");
 
             // Create the tilemap from the XML configuration file.
-            TileMap _tileMap = TileMap.FromFile(Content, "sprites/tilemap-definition.xml");
+            TileMap _tileMap = TileMap.FromFile(Content, "sprites/tilemap2-definition.xml");
             _blockMap = new BlockMap(_tileMap);
             _blockMap.Scale = new Vector2(5f, 5f);
 
@@ -123,6 +123,8 @@ namespace SE_Platformer_unlocker.Scenes
                 _slime_1.Update(gameTime);
 
                 _coin.Update(gameTime);
+
+                collisionHandler.HandleCollisions();
 
                 // Check for keyboard input and handle it.
                 CheckKeyboardInput();

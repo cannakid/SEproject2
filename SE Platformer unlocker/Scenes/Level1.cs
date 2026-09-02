@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SE_Platformer_unlocker.Base;
 using SE_Platformer_unlocker.Blocks;
+using SE_Platformer_unlocker.Collision;
 using SE_Platformer_unlocker.Entities;
 using SE_Platformer_unlocker.UI;
 using System;
@@ -17,7 +18,8 @@ namespace SE_Platformer_unlocker.Scenes
 {
     public class Level1 : LevelScene
     {
-        private Sprite _champSprite;
+
+        private List<Sprite> _champSprites;
         private Champion _champ;
         private const int champHealth = 3;
 
@@ -53,17 +55,18 @@ namespace SE_Platformer_unlocker.Scenes
 
             Core.ExitOnEscape = false;
 
+            
 
             Rectangle screenBounds = Core.GraphicsDevice.PresentationParameters.Bounds;
 
-            _champ = new Champion(_champSprite, new Point(100, 1000), new Point(80, 80), this, _jumpSoundEffect, _hurtSoundEffect, champHealth);
-            Interactables.Add(_champ);
+            _champ = new Champion(_champSprites, new Point(100, 1200), new Point(80, 80), this, _jumpSoundEffect, _hurtSoundEffect, champHealth);
+            collisionHandler.Add(_champ);
 
             _slime = new Slime(_slimeSprite, new Point(500, 1200), new Point(80, 80), this, 1);
-            Interactables.Add(_slime);
+            collisionHandler.Add(_slime);
 
             _coin = new Coin(_coinSprite, new Rectangle(2000, 1200, 80, 80), this);
-            Interactables.Add(_coin);
+            collisionHandler.Add(_coin);
 
             pauseButton = new UIIcon(new Sprite(new TextureRegion(pauseTexture, 0, 0, 600, 600)), new Rectangle(Core.WIDTH - 80, 80, 80, 80), () => { isPauseOpen = true; });
             pauseButton.CenterIcon();
@@ -72,12 +75,12 @@ namespace SE_Platformer_unlocker.Scenes
             List<Block> blocks = _blockMap.CreateBlocks();
             foreach (Block b in blocks)
             {
-                Interactables.Add(b);
+                collisionHandler.Add(b);
             }
             _hearts = new List<UIIcon>();
             for (int i = 0; i < champHealth; i++)
             {
-                _hearts.Add(new UIIcon(_heartSprite, new Rectangle(40 + 80* i, 40, 80, 80), () => { }));
+                _hearts.Add(new UIIcon(_heartSprite, new Rectangle(40 + 80 * i, 40, 80, 80), () => { }));
             }
             currentHeartDisplay = _champ.Health;
         }
@@ -86,7 +89,7 @@ namespace SE_Platformer_unlocker.Scenes
         {
             idle = TextureAtlas.FromFile(Content, "sprites/idle-definition.xml");
 
-            _champSprite = idle.CreateAnimatedSprite("idle-animation");
+            _champSprite_idle = idle.CreateAnimatedSprite("idle-animation");
 
             TextureAtlas slimeAtlas = TextureAtlas.FromFile(Content, "sprites/slime-definition.xml");
 
@@ -127,6 +130,8 @@ namespace SE_Platformer_unlocker.Scenes
                 _slime.Update(gameTime);
 
                 _coin.Update(gameTime);
+
+                collisionHandler.HandleCollisions();
 
                 // Check for keyboard input and handle it.
                 CheckKeyboardInput();

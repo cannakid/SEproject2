@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace SE_Platformer_unlocker.Entities
 {
-    internal class Slime : Creature
+    internal class DangerSlime : Creature
     {
 
-        public Slime(Sprite sprite, Point pos, Point size, LevelScene scene, int health) : base(sprite, pos, size, scene, health)
+        public DangerSlime(Sprite sprite, Point pos, Point size, LevelScene scene, int health) : base(sprite, pos, size, scene, health)
         {
             NextPos = HitBox;
             speed = new Vector2(2f, 0);

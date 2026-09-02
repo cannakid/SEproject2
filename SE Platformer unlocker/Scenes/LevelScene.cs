@@ -11,19 +11,20 @@ namespace SE_Platformer_unlocker.Scenes
 {
     public abstract class LevelScene : Scene
     {
+        protected CollisionHandler collisionHandler;
+
         public bool isPauseOpen { get; set; }
         protected Scene pause;
 
-        public List<IInteractable> Interactables { get; private set; }
 
         public override void Initialize()
         {
             base.Initialize();
 
+            collisionHandler = new CollisionHandler(this);
+
             pause = new PauseScene(this);
             pause.Initialize();
-
-            Interactables = new List<IInteractable>();
         }
     }
 }

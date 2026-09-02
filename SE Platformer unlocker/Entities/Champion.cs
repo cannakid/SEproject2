@@ -17,23 +17,21 @@ namespace SE_Platformer_unlocker.Entities
 {
     internal class Champion : Creature
     {
-        private Vector2 speed;
-        private bool isGrounded;
-        private bool remainGrounded = false;
+        public bool IsGrounded { get; set; } = false;
+        public bool RemainGrounded { get; set; } = false;
 
         private SoundEffect jumpSound;
-        private SoundEffect hurtSound;
-
-        public Rectangle PrevPos;
+        //private SoundEffect hurtSound;
 
         private TimeSpan invincibility = TimeSpan.Zero;
         private const int invincibilityDuration = 3;
 
-        public Champion(Sprite sprite, Point pos, Point size, LevelScene scene, SoundEffect jump, SoundEffect hurt, int health) : base(sprite, pos, size, scene, health)
+        private TimeSpan jumpTimeSpan = TimeSpan.Zero;
+
+        public Champion(List<Sprite> sprites, Point pos, Point size, LevelScene scene, SoundEffect jump, SoundEffect hurt, int health) : base(sprites, pos, size, scene, health)
         {
-            PrevPos = hitBox;
             jumpSound = jump;
-            hurtSound = hurt;
+            //hurtSound = hurt;
         }
 
         public override void Update(GameTime gameTime)
@@ -54,6 +52,9 @@ namespace SE_Platformer_unlocker.Entities
             invincibility -= gameTime.ElapsedGameTime;
             if (invincibility < TimeSpan.Zero) invincibility = TimeSpan.Zero;
 
+            jumpTimeSpan -= gameTime.ElapsedGameTime;
+            if (jumpTimeSpan < TimeSpan.Zero) jumpTimeSpan = TimeSpan.Zero;
+
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 speed.X += 1;
@@ -62,116 +63,63 @@ namespace SE_Platformer_unlocker.Entities
             {
                 speed.X -= 1;
             }
-            speed.X = speed.X * 0.9f;
+            speed.X = speed.X * 0.9f; // friction
+
             if (Math.Abs(speed.X) < 0.1f)
             {
                 speed.X = 0;
             }
-            if (!isGrounded)
+            if (!IsGrounded)
             {
                 speed.Y += 0.5f;
-            }
-            if (isGrounded && Keyboard.GetState().IsKeyDown(Keys.W))
-            {
-                Core.Audio.PlaySoundEffect(jumpSound);
-                speed.Y -= 15;
-                isGrounded = false;
-            }
-            hitBox.Offset(speed);
-            // interact
-            remainGrounded = false;
-            
-            foreach (IInteractable interactable in scene.Interactables)
-            {
-                if (!interactable.Equals(this))
+                if (jumpTimeSpan == TimeSpan.Zero)
                 {
-                    InteractionDirection direction = hitBox.CollisionDirection(interactable.HitBox, PrevPos);
-                    if (direction != InteractionDirection.NONE)
-                    {
-                        InteractionType result = interactable.Interact(direction);
-                        HandleResult(result, direction, interactable);
-
-                    }
+                    spriteIndex = 3;
                 }
             }
-            if (hitBox.X < 0)
+            if (IsGrounded && Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                hitBox.X = 0;
+                Core.Audio.PlaySoundEffect(jumpSound);
+                spriteIndex = 2;
+                jumpTimeSpan.Add(TimeSpan.FromSeconds(1));
+                speed.Y -= 15;
+                IsGrounded = false;
             }
-            else if (hitBox.X > Core.WIDTH - hitBox.Width)
+            RemainGrounded = false;
+
+            if (speed.X > 0 && spriteIndex == 0)
             {
-                hitBox.X = Core.WIDTH - hitBox.Width;
+                spriteIndex = 1; // running
             }
-            isGrounded = remainGrounded;
-            PrevPos = hitBox;
-            
+            else if (speed.X == 0)
+            {
+                spriteIndex = 0;
+            }
+        }
+
+        public override void TakeDamage(int amount)
+        {
+            if (invincibility != TimeSpan.Zero)
+            {
+                return;
+            }
+            invincibility = invincibility.Add(TimeSpan.FromSeconds(invincibilityDuration));
+            base.TakeDamage(amount);
+        }
+
+        public override void UpdatePosition()
+        {
+            base.UpdatePosition();
+            IsGrounded = RemainGrounded;
         }
 
         public override InteractionType Interact(InteractionDirection direction)
         {
-            if (direction == InteractionDirection.TOP)
+            if (direction == InteractionDirection.BOTTOM)
             {
                 return InteractionType.HIT;
             }
             return InteractionType.NONE;
-        }
-
-        private void HandleResult(InteractionType type, InteractionDirection direction, IInteractable interactable)
-        {
-            if (type == InteractionType.NONE)
-            {
-                return;
-            }
-            if (type == InteractionType.BLOCK)
-            {
-                if (direction == InteractionDirection.TOP)
-                {
-                    isGrounded = true;
-                    remainGrounded = true;
-                    speed.Y = 0;
-                    hitBox.Y = interactable.HitBox.Top - HitBox.Height;
-                }
-                else if (direction == InteractionDirection.BOTTOM)
-                {
-                    speed.Y = 0;
-                    hitBox.Y = interactable.HitBox.Bottom;
-                }
-                else if (direction == InteractionDirection.LEFT)
-                {
-                    speed.X = 0;
-                    hitBox.X = interactable.HitBox.Left - HitBox.Width;
-                }
-                else if (direction == InteractionDirection.RIGHT)
-                {
-                    speed.X = 0;
-                    hitBox.X = interactable.HitBox.Right;
-                }
-            }
-            else if (type == InteractionType.HIT)
-            {
-                if (invincibility == TimeSpan.Zero)
-                {
-                    Core.Audio.PlaySoundEffect(hurtSound);
-                    Health -= 1;
-                    invincibility = invincibility.Add(TimeSpan.FromSeconds(3));
-                }
-            }
-            else if (type == InteractionType.PUSH)
-            {
-                // not yet implemented
-            }
-            else if (type == InteractionType.VICTORY)
-            {
-                if (scene is Level1)
-                {
-                    Core.ChangeScene(new VictoryScene(new Level2()));
-                }
-                else
-                {
-                    Core.ChangeScene(new VictoryScene());
-                }
-                
-            }
         }
     }
 }
