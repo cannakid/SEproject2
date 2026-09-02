@@ -19,6 +19,10 @@ namespace SE_Platformer_unlocker.Managers
         public int Width => screen.Width;
         public int Height => screen.Height;
 
+        public int CenterWidth => Width / 2;
+
+        public int CenterHeight => Height / 2;
+
         public int ScaledWidth(int width)
         {
             return (int)(width * ((float)Width / DEV_WIDTH));

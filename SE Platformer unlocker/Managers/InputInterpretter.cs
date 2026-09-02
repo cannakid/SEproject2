@@ -1,5 +1,6 @@
 ﻿
 
+using Library;
 using Library.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -13,6 +14,31 @@ namespace SE_Platformer_unlocker.Managers
         public InputInterpretter(InputManager manager) 
         {
             this.manager = manager;
+
+            keyBinds.Add(Actions.Movement1, Keys.A);
+            keyBinds.Add(Actions.Movement1, Keys.D);
+
+            buttonBinds.Add(Actions.Movement1, Buttons.LeftThumbstickLeft);
+            buttonBinds.Add(Actions.Movement1, Buttons.LeftThumbstickRight);
+
+            keyBinds.Add(Actions.Gravity1, Keys.W);
+            keyBinds.Add(Actions.Gravity2, Keys.S);
+
+            buttonBinds.Add(Actions.Movement1, Buttons.A);
+            buttonBinds.Add(Actions.Movement1, Buttons.B);
+
+            keyBinds.Add(Actions.Attack1, Keys.E);
+            keyBinds.Add(Actions.Attack2, Keys.R);
+
+            buttonBinds.Add(Actions.Movement1, Buttons.X);
+            buttonBinds.Add(Actions.Movement1, Buttons.Y);
+
+            keyBinds.Add(Actions.Movement1, Keys.LeftShift);
+            keyBinds.Add(Actions.Movement1, Keys.LeftControl);
+
+            buttonBinds.Add(Actions.Movement1, Buttons.LeftTrigger);
+            buttonBinds.Add(Actions.Movement1, Buttons.RightTrigger);
+
             FindGamePad();
         }
         

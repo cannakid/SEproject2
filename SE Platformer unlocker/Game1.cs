@@ -1,20 +1,11 @@
 ﻿using Library;
-using Library.Graphics;
-using Library.Input;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-using SE_Platformer_unlocker.Base;
-using SE_Platformer_unlocker.Blocks;
-using SE_Platformer_unlocker.Entities;
 using SE_Platformer_unlocker.Managers;
 using SE_Platformer_unlocker.Scenes;
 using SE_Platformer_unlocker.UI;
-using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace SE_Platformer_unlocker
 {
@@ -22,7 +13,7 @@ namespace SE_Platformer_unlocker
     {
         public static InputInterpretter Interpretter { get; private set; }
 
-        //public static SizeManager SizeManager { get; private set; }
+        public static SizeManager SizeManager { get; private set; }
 
         private Texture2D brown;
         private Texture2D yellow;
@@ -66,13 +57,5 @@ namespace SE_Platformer_unlocker
             base.Update(gameTime);
             Interpretter.Update(gameTime);
         }
-        /*
-       
-
-        protected override void Draw(GameTime gameTime)
-        {
-            base.Draw(gameTime);
-        }
-        */
     }
 }
