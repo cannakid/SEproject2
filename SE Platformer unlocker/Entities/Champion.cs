@@ -41,7 +41,14 @@ namespace SE_Platformer_unlocker.Entities
             base.Update(gameTime);
             if (!Alive)
             {
-                Core.ChangeScene(new GameOverScene());
+                if (scene is Level1)
+                {
+                    Core.ChangeScene(new GameOverScene(new Level1()));
+                }
+                else if (scene is Level2)
+                {
+                    Core.ChangeScene(new GameOverScene(new Level2()));
+                }
             }
 
             invincibility -= gameTime.ElapsedGameTime;

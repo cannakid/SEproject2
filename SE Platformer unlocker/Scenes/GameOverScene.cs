@@ -8,13 +8,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace SE_Platformer_unlocker.Scenes
 {
-    internal class GameOverScene : Scene
+    internal class GameOverScene : BaseScene
     {
+        public GameOverScene(LevelScene scene)
+        {
+            this.scene = scene;
+        }
+
+        private LevelScene scene;
+
         private SpriteFont _titleFont;
 
         private SpriteFont _normalFont;
@@ -38,44 +46,22 @@ namespace SE_Platformer_unlocker.Scenes
         {
             base.Initialize();
 
-            string title1 = "Game";
-            titleTop = new Text(_titleFont, title1);
-            titleTop.CenterText();
+            UIText game = Game1.UIFactory.CreateText("Game", _titleFont, 1280, 150);
+            Add(game);
+            Add(Game1.UIFactory.CreateShadow(game));
 
-
-            titleTopShadow = new Text(_titleFont, title1);
-            titleTopShadow.CenterText();
-            titleTopShadow.Color = Color.Black * 0.5f;
-            titleTopShadow.LayerDepth = 1;
-
-            string title2 = "Over";
-            titleBottom = new Text(_titleFont, title2);
-            titleBottom.CenterText();
-
-
-            titleBottomShadow = new Text(_titleFont, title2);
-            titleBottomShadow.CenterText();
-            titleBottomShadow.Color = Color.Black * 0.5f;
-            titleBottomShadow.LayerDepth = 1;
-
-
-            Text retryText = new Text(_normalFont, "Retry");
-
-            Text menuText = new Text(_normalFont, "Menu");
-
-            Text quitText = new Text(_normalFont, "Quit");
+            UIText over = Game1.UIFactory.CreateText("Over", _titleFont, 1280, 300);
+            Add(over);
+            Add(Game1.UIFactory.CreateShadow(over));
 
             buttonSprite.CenterOrigin();
-            buttonSprite.Scale = new Vector2(4f, 4f);
+            buttonSprite.Scale = new Vector2(6f, 4f);
 
-            retry = new UIButton(retryText, buttonSprite, new Rectangle(Core.WIDTH / 2, 2 * Core.HEIGHT / 5, (int)buttonSprite.Width, (int)buttonSprite.Height), () => { Core.ChangeScene(new Level1()); });
-            retry.CenterButton();
+            Add(Game1.UIFactory.CreateButton("Retry", _normalFont, buttonSprite, 1280, 500, 600, 200, () => { Core.ChangeScene(scene); }));
 
-            menu = new UIButton(menuText, buttonSprite, new Rectangle(Core.WIDTH / 2, (int)(2.5f * Core.HEIGHT / 5), (int)buttonSprite.Width, (int)buttonSprite.Height), () => { Core.ChangeScene(new TitleScene()); });
-            menu.CenterButton();
+            Add(Game1.UIFactory.CreateButton("Menu", _normalFont, buttonSprite, 1280, 700, 600, 200, () => { Core.ChangeScene(new TitleScene()); }));
 
-            quit = new UIButton(quitText, buttonSprite, new Rectangle(Core.WIDTH / 2, 3 * Core.HEIGHT / 5, (int)buttonSprite.Width, (int)buttonSprite.Height), () => { Core.Instance.Quit(); });
-            quit.CenterButton();
+            Add(Game1.UIFactory.CreateButton("Quit", _normalFont, buttonSprite, 1280, 900, 600, 200, () => { Core.Instance.Quit(); }));
         }
         
         public override void LoadContent()
@@ -97,25 +83,15 @@ namespace SE_Platformer_unlocker.Scenes
             Core.GraphicsDevice.Clear(new Color(32, 40, 78, 255));
 
             // Background
-            Core.SpriteBatch.Begin(samplerState: SamplerState.PointWrap);
-            //_background.Draw(Core.SpriteBatch, Vector2.Zero);
-            Core.SpriteBatch.End();
+            /*Core.SpriteBatch.Begin(samplerState: SamplerState.PointWrap);
+            _background.Draw(Core.SpriteBatch, Vector2.Zero);
+            Core.SpriteBatch.End();*/
 
 
             // rest
             Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp, sortMode: SpriteSortMode.BackToFront);
 
-            int center = Core.WIDTH / 2;
-
-            titleTop.Draw(Core.SpriteBatch, new Vector2(center, Core.HEIGHT / 5));
-            titleTopShadow.Draw(Core.SpriteBatch, new Vector2(center, Core.HEIGHT / 5) + new Vector2(10, 10));
-
-            titleBottom.Draw(Core.SpriteBatch, new Vector2(center, (int)(1.5f * Core.HEIGHT / 5)));
-            titleBottomShadow.Draw(Core.SpriteBatch, new Vector2(center, (int)(1.5f * Core.HEIGHT / 5)) + new Vector2(10, 10));
-
-            retry.Draw(Core.SpriteBatch);
-            menu.Draw(Core.SpriteBatch);
-            quit.Draw(Core.SpriteBatch);
+            base.Draw(gameTime);
 
             Core.SpriteBatch.End();
         }
@@ -124,9 +100,7 @@ namespace SE_Platformer_unlocker.Scenes
 
         public override void Update(GameTime gameTime)
         {
-            retry.Update(gameTime);
-            menu.Update(gameTime);
-            quit.Update(gameTime);
+            base.Update(gameTime);
         }
     }
 }
