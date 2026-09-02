@@ -8,7 +8,7 @@ using SE_Platformer_unlocker.Entities;
 
 namespace SE_Platformer_unlocker.Blocks
 {
-    public class Block : IInteractable
+    public abstract class Block : IInteractable
     {
         public Block(int x, int y, int width, int height)
         {
@@ -17,9 +17,6 @@ namespace SE_Platformer_unlocker.Blocks
 
         public Rectangle HitBox { get; private set; }
 
-        public InteractionType Interact(InteractionDirection direction)
-        {
-            return InteractionType.BLOCK;
-        }
+        public abstract InteractionType Interact(InteractionDirection direction);
     }
 }

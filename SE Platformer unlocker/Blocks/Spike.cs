@@ -12,31 +12,16 @@ using System.Threading.Tasks;
 
 namespace SE_Platformer_unlocker.Blocks
 {
-    internal class Spike : Sprite,  IInteractable
+    internal class Spike : Block
     {
-        public Spike(Texture2D texture, Point pos, Point size)
+        public Spike(int x, int y, int width, int height) : base(x, y, width, height)
         {
-            //this.textureFile = textureFile;
-            Texture = texture;
-            TextureRect = new Rectangle(pos, size);
-        }
-        public Texture2D Texture { get; set; }
-
-        public Rectangle TextureRect { get; protected set; }
-
-        public Rectangle HitBox => TextureRect;
-
-        public void Draw(SpriteBatch batch)
-        {
-            if (Texture != null)
-            {
-                batch.Draw(Texture, TextureRect, Color.White);
-            }
+            
         }
 
-        public InteractionType Interact(InteractionDirection direction)
+        public override InteractionType Interact(InteractionDirection direction)
         {
-            if (direction == InteractionDirection.TOP)
+            if (direction == InteractionDirection.TOP || direction == InteractionDirection.WITHIN)
             {
                 return InteractionType.HIT;
             }

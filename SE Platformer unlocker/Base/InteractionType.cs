@@ -11,6 +11,7 @@ namespace SE_Platformer_unlocker.Base
         BLOCK,
         HIT,
         PUSH,
+        VICTORY,
         NONE
     }
 }

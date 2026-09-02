@@ -7,9 +7,9 @@ namespace SE_Platformer_unlocker.Entities
 {
     internal abstract class Creature : Entity
     {
-        protected Creature(Sprite sprite, Point pos, Point size, LevelScene scene) : base(sprite, new Rectangle(pos, size), scene)
+        protected Creature(Sprite sprite, Point pos, Point size, LevelScene scene, int health) : base(sprite, new Rectangle(pos, size), scene)
         {
-
+            Health = health;
         }
 
         public bool Alive => health > 0;
@@ -27,5 +27,13 @@ namespace SE_Platformer_unlocker.Entities
             }
         }
 
+        public override void Draw(GameTime gameTime)
+        {
+            if (!Alive)
+            {
+                return;
+            }
+            base.Draw(gameTime);
+        }
     }
 }

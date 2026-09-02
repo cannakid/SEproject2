@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace SE_Platformer_unlocker.Entities
 {
-    internal class Champion : Entity
+    internal class Champion : Creature
     {
         private Vector2 speed;
         private bool isGrounded;
@@ -23,17 +23,28 @@ namespace SE_Platformer_unlocker.Entities
 
         private SoundEffect jumpSound;
 
-        public Rectangle NextPos;
+        public Rectangle PrevPos;
 
-        public Champion(Sprite sprite, Point pos, Point size, LevelScene scene, SoundEffect jump) : base(sprite, new Rectangle(pos, size), scene)
+        private TimeSpan invincibility = TimeSpan.Zero;
+        private const int invincibilityDuration = 3;
+
+        public Champion(Sprite sprite, Point pos, Point size, LevelScene scene, SoundEffect jump, int health) : base(sprite, pos, size, scene, health)
         {
-            NextPos = hitBox;
+            PrevPos = hitBox;
             jumpSound = jump;
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            if (!Alive)
+            {
+                Core.ChangeScene(new GameOverScene());
+            }
+
+            invincibility -= gameTime.ElapsedGameTime;
+            if (invincibility < TimeSpan.Zero) invincibility = TimeSpan.Zero;
+
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 speed.X += 1;
@@ -57,7 +68,7 @@ namespace SE_Platformer_unlocker.Entities
                 speed.Y -= 12;
                 isGrounded = false;
             }
-            NextPos.Offset(speed);
+            hitBox.Offset(speed);
             // interact
             remainGrounded = false;
             
@@ -65,23 +76,31 @@ namespace SE_Platformer_unlocker.Entities
             {
                 if (!interactable.Equals(this))
                 {
-                    InteractionDirection direction = NextPos.CollisionDirection(interactable.HitBox, HitBox);
+                    InteractionDirection direction = hitBox.CollisionDirection(interactable.HitBox, PrevPos);
                     if (direction != InteractionDirection.NONE)
                     {
                         InteractionType result = interactable.Interact(direction);
                         HandleResult(result, direction, interactable);
+
                     }
                 }
-                
+            }
+            if (hitBox.X < 0)
+            {
+                hitBox.X = 0;
+            }
+            else if (hitBox.X > Core.WIDTH - hitBox.Width)
+            {
+                hitBox.X = Core.WIDTH - hitBox.Width;
             }
             isGrounded = remainGrounded;
-            hitBox = NextPos;
+            PrevPos = hitBox;
             
         }
 
         public override InteractionType Interact(InteractionDirection direction)
         {
-            if (direction == InteractionDirection.BOTTOM)
+            if (direction == InteractionDirection.TOP)
             {
                 return InteractionType.HIT;
             }
@@ -101,34 +120,39 @@ namespace SE_Platformer_unlocker.Entities
                     isGrounded = true;
                     remainGrounded = true;
                     speed.Y = 0;
-                    NextPos.Y = interactable.HitBox.Top - HitBox.Height;
+                    hitBox.Y = interactable.HitBox.Top - HitBox.Height;
                 }
                 else if (direction == InteractionDirection.BOTTOM)
                 {
                     speed.Y = 0;
-                    NextPos.Y = interactable.HitBox.Bottom;
+                    hitBox.Y = interactable.HitBox.Bottom;
                 }
                 else if (direction == InteractionDirection.LEFT)
                 {
                     speed.X = 0;
-                    NextPos.X = interactable.HitBox.Left - HitBox.Width;
+                    hitBox.X = interactable.HitBox.Left - HitBox.Width;
                 }
                 else if (direction == InteractionDirection.RIGHT)
                 {
                     speed.X = 0;
-                    NextPos.X = interactable.HitBox.Right;
+                    hitBox.X = interactable.HitBox.Right;
                 }
             }
             else if (type == InteractionType.HIT)
             {
-                if (interactable is Creature c)
+                if (invincibility == TimeSpan.Zero)
                 {
-                    c.Health -= 1;
+                    Health -= 1;
+                    invincibility = invincibility.Add(TimeSpan.FromSeconds(3));
                 }
             }
             else if (type == InteractionType.PUSH)
             {
                 // not yet implemented
+            }
+            else if (type == InteractionType.VICTORY)
+            {
+                Core.ChangeScene(new VictoryScene());
             }
         }
     }

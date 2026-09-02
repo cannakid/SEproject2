@@ -27,6 +27,9 @@ namespace SE_Platformer_unlocker.Scenes
 
         private SpriteFont _normalFont;
 
+        private Text titleTop;
+        private Text titleTopShadow;
+
         private UIButton cont;
         private UIButton options;
         private UIButton menu;
@@ -36,6 +39,16 @@ namespace SE_Platformer_unlocker.Scenes
         public override void Initialize()
         {
             base.Initialize();
+
+            string title1 = "Paused";
+            titleTop = new Text(_titleFont, title1);
+            titleTop.CenterText();
+
+
+            titleTopShadow = new Text(_titleFont, title1);
+            titleTopShadow.CenterText();
+            titleTopShadow.Color = Color.Black * 0.5f;
+            titleTopShadow.LayerDepth = 1;
 
             Text contText = new Text(_normalFont, "Continue");
 
@@ -74,6 +87,11 @@ namespace SE_Platformer_unlocker.Scenes
             cont.Draw(Core.SpriteBatch);
             options.Draw(Core.SpriteBatch);
             menu.Draw(Core.SpriteBatch);
+
+            int center = Core.WIDTH / 2;
+
+            titleTop.Draw(Core.SpriteBatch, new Vector2(center, Core.HEIGHT / 5));
+            titleTopShadow.Draw(Core.SpriteBatch, new Vector2(center, Core.HEIGHT / 5) + new Vector2(10, 10));
 
             Core.SpriteBatch.End();
         }

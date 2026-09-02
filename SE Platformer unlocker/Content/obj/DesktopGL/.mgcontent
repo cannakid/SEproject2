@@ -16,13 +16,19 @@
     <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/herochar_spritesheet(new).png</File>
     <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/spike.png</File>
     <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/Background.png</File>
+    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/coin.png</File>
+    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/hearts.png</File>
     <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/hud.png</File>
     <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/Idle-Sheet.png</File>
     <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/options_icon.png</File>
+    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/slime_green.png</File>
     <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/world_tileset.png</File>
     <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/Yellow.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

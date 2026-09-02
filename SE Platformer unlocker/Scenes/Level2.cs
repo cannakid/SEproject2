@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SE_Platformer_unlocker.Scenes
 {
-    public class Level2 : Scene
+    public class Level2 : LevelScene
     {
         public override void Draw(GameTime gameTime)
         {

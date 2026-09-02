@@ -20,11 +20,14 @@ namespace SE_Platformer_unlocker.Scenes
         private Sprite _champSprite;
         private Champion _champ;
 
+        private Sprite _slimeSprite;
+        private Creature _slime;
+
+        private Sprite _coinSprite;
+        private Entity _coin;
+
         // Defines the tilemap to draw.
         private BlockMap _blockMap;
-
-        // Defines the bounds of the room that the slime and bat are contained within.
-        private Rectangle _roomBounds;
 
         // The sound effect to play when the bat bounces off the edge of the screen.
         private SoundEffect _hurtSoundEffect;
@@ -37,8 +40,11 @@ namespace SE_Platformer_unlocker.Scenes
         private UIIcon pauseButton;
         private Texture2D pauseTexture;
 
+        private Sprite _heartSprite;
+        private Sprite _emptyHeartSprite;
+        private List<UIIcon> _hearts;
 
-        //private Block test;
+        private int currentHeartDisplay;
 
         public override void Initialize()
         {
@@ -49,20 +55,30 @@ namespace SE_Platformer_unlocker.Scenes
 
             Rectangle screenBounds = Core.GraphicsDevice.PresentationParameters.Bounds;
 
-            _champ = new Champion(_champSprite, new Point(100, 1000), new Point(80, 80), this, _jumpSoundEffect);
+            _champ = new Champion(_champSprite, new Point(100, 1000), new Point(80, 80), this, _jumpSoundEffect, 3);
+            Interactables.Add(_champ);
+
+            _slime = new Slime(_slimeSprite, new Point(500, 1280), new Point(80, 80), this, 1);
+            Interactables.Add(_slime);
+
+            _coin = new Coin(_coinSprite, new Rectangle(2000, 1200, 80, 80), this);
+            Interactables.Add(_coin);
 
             pauseButton = new UIIcon(new Sprite(new TextureRegion(pauseTexture, 0, 0, 600, 600)), new Rectangle(Core.WIDTH - 80, 80, 80, 80), () => { isPauseOpen = true; });
             pauseButton.CenterIcon();
 
-            //test = new Block(0, 1360, Core.WIDTH, 80);
-            //Interactables.Add(test);
 
             List<Block> blocks = _blockMap.CreateBlocks();
             foreach (Block b in blocks)
             {
                 Interactables.Add(b);
             }
-
+            _hearts = new List<UIIcon>();
+            for (int i = 0; i < 3; i++)
+            {
+                _hearts.Add(new UIIcon(_heartSprite, new Rectangle(40 + 80* i, 40, 80, 80), () => { }));
+            }
+            currentHeartDisplay = _champ.Health;
         }
 
         public override void LoadContent()
@@ -70,6 +86,19 @@ namespace SE_Platformer_unlocker.Scenes
             idle = TextureAtlas.FromFile(Content, "sprites/idle-definition.xml");
 
             _champSprite = idle.CreateAnimatedSprite("idle-animation");
+
+            TextureAtlas slimeAtlas = TextureAtlas.FromFile(Content, "sprites/slime-definition.xml");
+
+            _slimeSprite = slimeAtlas.CreateAnimatedSprite("slime-animation");
+
+            TextureAtlas coinAtlas = TextureAtlas.FromFile(Content, "sprites/coin-definition.xml");
+
+            _coinSprite = coinAtlas.CreateAnimatedSprite("coin-animation");
+
+            TextureAtlas heartAtlas = TextureAtlas.FromFile(Content, "sprites/hearts-definition.xml");
+
+            _heartSprite = heartAtlas.CreateSprite("heart-full");
+            _emptyHeartSprite = heartAtlas.CreateSprite("heart-empty");
 
             // Create the tilemap from the XML configuration file.
             TileMap _tileMap = TileMap.FromFile(Content, "sprites/tilemap-definition.xml");
@@ -79,6 +108,8 @@ namespace SE_Platformer_unlocker.Scenes
             pauseTexture = Content.Load<Texture2D>("sprites/options_icon");
 
             _jumpSoundEffect = Content.Load<SoundEffect>("audio/jump");
+
+
         }
 
         public override void Update(GameTime gameTime)
@@ -91,6 +122,10 @@ namespace SE_Platformer_unlocker.Scenes
             {
                 _champ.Update(gameTime);
 
+                _slime.Update(gameTime);
+
+                _coin.Update(gameTime);
+
                 // Check for keyboard input and handle it.
                 CheckKeyboardInput();
 
@@ -99,10 +134,13 @@ namespace SE_Platformer_unlocker.Scenes
                     isPauseOpen = true;
                 }
                 pauseButton.Update(gameTime);
-            }
-                
 
-            
+                if (_champ.Health < currentHeartDisplay)
+                {
+                    _hearts[currentHeartDisplay - 1].ChangeIcon(_emptyHeartSprite);
+                    currentHeartDisplay--;
+                }
+            }
         }
 
         private void CheckKeyboardInput()
@@ -137,7 +175,6 @@ namespace SE_Platformer_unlocker.Scenes
             {
                 Core.GraphicsDevice.Clear(Color.CornflowerBlue);
             }
-                
 
             Core.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
 
@@ -145,7 +182,16 @@ namespace SE_Platformer_unlocker.Scenes
 
             _champ.Draw(gameTime);
 
+            _slime.Draw(gameTime);
+
+            _coin.Draw(gameTime);
+
             pauseButton.Draw(Core.SpriteBatch);
+
+            foreach (UIIcon heart in _hearts)
+            {
+                heart.Draw(Core.SpriteBatch);
+            }
 
             Core.SpriteBatch.End();
 

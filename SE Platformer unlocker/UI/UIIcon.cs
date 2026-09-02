@@ -3,6 +3,7 @@ using Library.Graphics;
 using Library.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SE_Platformer_unlocker.Blocks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,12 @@ namespace SE_Platformer_unlocker.UI
                     action.Invoke();
                 }
             }
+        }
+
+        public void ChangeIcon(Sprite newIcon)
+        {
+            image = newIcon;
+            image.Scale = button.Size.ToVector2() / image.Region.SourceRectangle.Size.ToVector2();
         }
     }
 }

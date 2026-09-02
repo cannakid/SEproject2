@@ -26,7 +26,7 @@ namespace SE_Platformer_unlocker.Entities
         public Rectangle HitBox { get => hitBox; }
         protected Rectangle hitBox;
 
-        public void Draw(GameTime gameTime)
+        public virtual void Draw(GameTime gameTime)
         {
             sprite.Draw(Core.SpriteBatch, hitBox.Location.ToVector2());
         }

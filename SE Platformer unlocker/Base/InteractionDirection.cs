@@ -12,6 +12,7 @@ namespace SE_Platformer_unlocker.Base
         TOP,
         LEFT,
         RIGHT,
+        WITHIN,
         NONE
     }
 }

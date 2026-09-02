@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+	<Texture>sprites/hearts</Texture>
+	<Regions>
+		<Region name="heart-full" x="0" y="0" width="16" height="16" />
+		<Region name="heart-empty" x="16" y="0" width="16" height="16" />
+	</Regions>
+	<Animations>
+		
+	</Animations>
+</TextureAtlas>

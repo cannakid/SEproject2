@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas>
+	<Texture>sprites/coin</Texture>
+	<Regions>
+		<Region name="coin-1" x="0" y="0" width="16" height="16" />
+		<Region name="coin-2" x="16" y="0" width="16" height="16" />
+		<Region name="coin-3" x="32" y="0" width="16" height="16" />
+		<Region name="coin-4" x="48" y="0" width="16" height="16" />
+		<Region name="coin-5" x="64" y="0" width="16" height="16" />
+		<Region name="coin-6" x="80" y="0" width="16" height="16" />
+		<Region name="coin-7" x="96" y="0" width="16" height="16" />
+		<Region name="coin-8" x="112" y="0" width="16" height="16" />
+		<Region name="coin-9" x="128" y="0" width="16" height="16" />
+		<Region name="coin-10" x="144" y="0" width="16" height="16" />
+		<Region name="coin-11" x="160" y="0" width="16" height="16" />
+		<Region name="coin-12" x="176" y="0" width="16" height="16" />
+	</Regions>
+	<Animations>
+		<Animation name="coin-animation" delay="200">
+			<Frame region="coin-1" />
+			<Frame region="coin-2" />
+			<Frame region="coin-3" />
+			<Frame region="coin-4" />
+			<Frame region="coin-5" />
+			<Frame region="coin-6" />
+			<Frame region="coin-7" />
+			<Frame region="coin-8" />
+			<Frame region="coin-9" />
+			<Frame region="coin-10" />
+			<Frame region="coin-11" />
+			<Frame region="coin-12" />
+		</Animation>
+	</Animations>
+</TextureAtlas>

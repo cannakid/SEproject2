@@ -19,11 +19,15 @@ namespace SE_Platformer_unlocker.Blocks
             List<Block> blocks = new List<Block>();
             for (int i = 0; i < _tiles.Length; i++)
             {
-                if (_tiles[i] != 15)
+                int col = i % Columns;
+                int row = i / Columns;
+                if (_tiles[i] < 8)
                 {
-                    int col = i % Columns;
-                    int row = i / Columns;
-                    blocks.Add(new Block((int)(col * TileWidth), (int)(row * TileHeight), (int)TileWidth, (int)TileHeight));
+                    blocks.Add(new SolidBlock((int)(col * TileWidth), (int)(row * TileHeight), (int)TileWidth, (int)TileHeight));
+                }
+                else if (_tiles[i] == 8)
+                {
+                    blocks.Add(new Spike((int)(col * TileWidth), (int)(row * TileHeight + 2), (int)TileWidth, (int)TileHeight - 2));
                 }
             }
             return blocks;

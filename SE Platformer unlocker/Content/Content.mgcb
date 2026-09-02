@@ -115,6 +115,36 @@
 /processorParam:TextureFormat=Color
 /build:sprites/Background.png
 
+#begin sprites/coin-definition.xml
+/copy:sprites/coin-definition.xml
+
+#begin sprites/coin.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:sprites/coin.png
+
+#begin sprites/hearts-definition.xml
+/copy:sprites/hearts-definition.xml
+
+#begin sprites/hearts.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:sprites/hearts.png
+
 #begin sprites/hud-definition.xml
 /copy:sprites/hud-definition.xml
 
@@ -156,6 +186,21 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:sprites/options_icon.png
+
+#begin sprites/slime_green.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:sprites/slime_green.png
+
+#begin sprites/slime-definition.xml
+/copy:sprites/slime-definition.xml
 
 #begin sprites/tilemap-definition.xml
 /copy:sprites/tilemap-definition.xml
