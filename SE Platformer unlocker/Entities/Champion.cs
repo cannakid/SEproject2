@@ -17,6 +17,7 @@ namespace SE_Platformer_unlocker.Entities
 {
     internal class Champion : Creature
     {
+        public bool standing { get; private set; } = true;
         public bool IsGrounded { get; set; } = false;
         public bool RemainGrounded { get; set; } = false;
 
@@ -27,6 +28,7 @@ namespace SE_Platformer_unlocker.Entities
         private const int invincibilityDuration = 3;
 
         private TimeSpan jumpTimeSpan = TimeSpan.Zero;
+
 
         public Champion(List<Sprite> sprites, Point pos, Point size, LevelScene scene, SoundEffect jump, SoundEffect hurt, int health) : base(sprites, pos, size, scene, health)
         {
@@ -72,28 +74,34 @@ namespace SE_Platformer_unlocker.Entities
             if (!IsGrounded)
             {
                 speed.Y += 0.5f;
-                if (jumpTimeSpan == TimeSpan.Zero)
+                if (jumpTimeSpan == TimeSpan.Zero && !standing)
                 {
-                    spriteIndex = 3;
+                    //spriteIndex = 3;
+                }
+                if (standing)
+                {
+                    standing = false;
                 }
             }
             if (IsGrounded && Keyboard.GetState().IsKeyDown(Keys.W))
             {
                 Core.Audio.PlaySoundEffect(jumpSound);
-                spriteIndex = 2;
+                //spriteIndex = 2;
                 jumpTimeSpan.Add(TimeSpan.FromSeconds(1));
                 speed.Y -= 15;
                 IsGrounded = false;
             }
             RemainGrounded = false;
 
-            if (speed.X > 0 && spriteIndex == 0)
+            if (hitBox.X < 0)
             {
-                spriteIndex = 1; // running
+                hitBox.X = 0;
+                speed.X = 0;
             }
-            else if (speed.X == 0)
+            else if (hitBox.X > Core.WIDTH - hitBox.Width)
             {
-                spriteIndex = 0;
+                hitBox.X = Core.WIDTH - hitBox.Width;
+                speed.X = 0;
             }
         }
 
@@ -111,6 +119,10 @@ namespace SE_Platformer_unlocker.Entities
         {
             base.UpdatePosition();
             IsGrounded = RemainGrounded;
+            if (IsGrounded)
+            {
+                standing = true;
+            }
         }
 
         public override InteractionType Interact(InteractionDirection direction)

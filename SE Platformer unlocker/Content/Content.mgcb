@@ -94,6 +94,9 @@
 /processorParam:TextureFormat=Color
 /build:sprites/coin.png
 
+#begin sprites/dangerslime-definition.xml
+/copy:sprites/dangerslime-definition.xml
+
 #begin sprites/hearts-definition.xml
 /copy:sprites/hearts-definition.xml
 
@@ -192,6 +195,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:sprites/slime_green.png
+
+#begin sprites/slime_purple.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:sprites/slime_purple.png
 
 #begin sprites/slime-definition.xml
 /copy:sprites/slime-definition.xml

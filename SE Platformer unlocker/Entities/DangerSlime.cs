@@ -14,11 +14,14 @@ namespace SE_Platformer_unlocker.Entities
     internal class DangerSlime : Creature
     {
 
-        public DangerSlime(Sprite sprite, Point pos, Point size, LevelScene scene, int health) : base(sprite, pos, size, scene, health)
+        public DangerSlime(Sprite sprite, Point pos, Point size, LevelScene scene, int health, Champion c) : base(sprite, pos, size, scene, health)
         {
             NextPos = HitBox;
             speed = new Vector2(2f, 0);
+            champ = c;
         }
+
+        private Champion champ;
 
         public override void Update(GameTime gameTime)
         {
@@ -39,6 +42,24 @@ namespace SE_Platformer_unlocker.Entities
             {
                 hitBox.X = Core.WIDTH - hitBox.Width;
                 speed.X = -speed.X;
+            }
+            if (Vector2.Distance(champ.HitBox.Location.ToVector2(), HitBox.Location.ToVector2()) < 300) {
+                if (champ.HitBox.X < HitBox.X)
+                {
+                    speed = new Vector2(-3f, 0);
+                }
+                else if (champ.HitBox.X > HitBox.X)
+                {
+                    speed = new Vector2(3f, 0);
+                }
+                else if (speed.X > 0)
+                {
+                    speed.X = 2f;
+                }
+                else
+                {
+                    speed.X = -2f;
+                }
             }
         }
 

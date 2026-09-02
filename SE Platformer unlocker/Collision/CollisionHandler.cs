@@ -134,7 +134,10 @@ namespace SE_Platformer_unlocker.Collision
                 {
                     c.IsGrounded = true;
                     c.RemainGrounded = true;
-                    c.spriteIndex = 4;
+                    if (c.spriteIndex == 3)
+                    {
+                        //c.spriteIndex = 4;
+                    }
                 }
                 
                 e.speed.Y = 0;

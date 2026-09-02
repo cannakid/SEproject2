@@ -21,9 +21,11 @@
     <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/options_icon.png</File>
     <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/Run-Sheet.png</File>
     <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/slime_green.png</File>
+    <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/slime_purple.png</File>
     <File>C:/Users/Jonas/Documents/TS2/S1/software engineering/SEplatformerV2/SE Platformer unlocker/SE Platformer unlocker/Content/sprites/world_tileset.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

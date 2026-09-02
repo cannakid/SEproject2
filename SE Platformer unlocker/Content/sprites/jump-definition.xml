@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TextureAtlas>
-	<Texture>sprites/Idle-Sheet</Texture>
+	<Texture>sprites/Jump-All-Sheet</Texture>
 	<Regions>
 		<Region name="jump-1" x="0" y="0" width="64" height="64" />
 		<Region name="jump-2" x="64" y="0" width="64" height="64" />

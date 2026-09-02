@@ -13,11 +13,14 @@ namespace SE_Platformer_unlocker.Scenes
 {
     public class Level2 : LevelScene
     {
-        private Sprite _champSprite;
+        private List<Sprite> _champSprites = new List<Sprite>();
         private Champion _champ;
 
         private Sprite _slimeSprite;
         private Creature _slime_1;
+
+        private Sprite _dangerSlimeSprite;
+        private Creature _slime_2;
 
         private Sprite _coinSprite;
         private Entity _coin;
@@ -51,13 +54,16 @@ namespace SE_Platformer_unlocker.Scenes
 
             Rectangle screenBounds = Core.GraphicsDevice.PresentationParameters.Bounds;
 
-            _champ = new Champion(_champSprite, new Point(100, 1000), new Point(80, 80), this, _jumpSoundEffect, _hurtSoundEffect, 3);
+            _champ = new Champion(_champSprites, new Point(100, 1000), new Point(80, 80), this, _jumpSoundEffect, _hurtSoundEffect, 3);
             collisionHandler.Add(_champ);
 
             _slime_1 = new Slime(_slimeSprite, new Point(500, 1200), new Point(80, 80), this, 1);
             collisionHandler.Add(_slime_1);
 
-            _coin = new Coin(_coinSprite, new Rectangle(2000, 1200, 80, 80), this);
+            _slime_2 = new DangerSlime(_dangerSlimeSprite, new Point(500, 840), new Point(80, 80), this, 1, _champ);
+            collisionHandler.Add(_slime_2);
+
+            _coin = new Coin(_coinSprite, new Rectangle(2000, 360, 80, 80), this);
             collisionHandler.Add(_coin);
 
             pauseButton = new UIIcon(new Sprite(new TextureRegion(pauseTexture, 0, 0, 600, 600)), new Rectangle(Core.WIDTH - 80, 80, 80, 80), () => { isPauseOpen = true; });
@@ -81,11 +87,15 @@ namespace SE_Platformer_unlocker.Scenes
         {
             idle = TextureAtlas.FromFile(Content, "sprites/idle-definition.xml");
 
-            _champSprite = idle.CreateAnimatedSprite("idle-animation");
+            _champSprites.Add(idle.CreateAnimatedSprite("idle-animation"));
 
             TextureAtlas slimeAtlas = TextureAtlas.FromFile(Content, "sprites/slime-definition.xml");
 
             _slimeSprite = slimeAtlas.CreateAnimatedSprite("slime-animation");
+
+            TextureAtlas dangerSlimeAtlas = TextureAtlas.FromFile(Content, "sprites/dangerslime-definition.xml");
+
+            _dangerSlimeSprite = dangerSlimeAtlas.CreateAnimatedSprite("slime-animation");
 
             TextureAtlas coinAtlas = TextureAtlas.FromFile(Content, "sprites/coin-definition.xml");
 
@@ -121,6 +131,8 @@ namespace SE_Platformer_unlocker.Scenes
                 _champ.Update(gameTime);
 
                 _slime_1.Update(gameTime);
+
+                _slime_2.Update(gameTime);
 
                 _coin.Update(gameTime);
 
@@ -183,6 +195,8 @@ namespace SE_Platformer_unlocker.Scenes
             _champ.Draw(gameTime);
 
             _slime_1.Draw(gameTime);
+
+            _slime_2.Draw(gameTime);
 
             _coin.Draw(gameTime);
 

@@ -19,7 +19,7 @@ namespace SE_Platformer_unlocker.Scenes
     public class Level1 : LevelScene
     {
 
-        private List<Sprite> _champSprites;
+        private List<Sprite> _champSprites = new List<Sprite>();
         private Champion _champ;
         private const int champHealth = 3;
 
@@ -37,8 +37,6 @@ namespace SE_Platformer_unlocker.Scenes
 
         // The sound effect to play when the slime eats a bat.
         private SoundEffect _jumpSoundEffect;
-
-        private TextureAtlas idle;
 
         private UIIcon pauseButton;
         private Texture2D pauseTexture;
@@ -87,9 +85,22 @@ namespace SE_Platformer_unlocker.Scenes
 
         public override void LoadContent()
         {
-            idle = TextureAtlas.FromFile(Content, "sprites/idle-definition.xml");
+            TextureAtlas idle = TextureAtlas.FromFile(Content, "sprites/idle-definition.xml");
 
-            _champSprite_idle = idle.CreateAnimatedSprite("idle-animation");
+            _champSprites.Add(idle.CreateAnimatedSprite("idle-animation"));
+
+            TextureAtlas run = TextureAtlas.FromFile(Content, "sprites/run-definition.xml");
+
+            _champSprites.Add(run.CreateAnimatedSprite("run-animation"));
+
+            TextureAtlas jump = TextureAtlas.FromFile(Content, "sprites/jump-definition.xml");
+
+            _champSprites.Add(jump.CreateAnimatedSprite("jump-animation"));
+ 
+            _champSprites.Add(jump.CreateAnimatedSprite("air-animation"));
+
+            _champSprites.Add(jump.CreateAnimatedSprite("land-animation"));
+
 
             TextureAtlas slimeAtlas = TextureAtlas.FromFile(Content, "sprites/slime-definition.xml");
 
